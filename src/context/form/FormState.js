@@ -1,13 +1,13 @@
-import formContext from "./FormContext";
+import FormContext from "./FormContext";
 import React, { useState } from "react";
 
 const FormState = (props) => {
   const [page, setPage] = useState(0);
-  const [formValue, setFormValue] = setState([{}]);
+  const [formValue, setFormValue] = useState([{}]);
   return (
-    <formContext.Provider value={{ page, setPage, formValue, setFormValue }}>
+    <FormContext.Provider value={{ page, setPage, formValue, setFormValue }}>
       {props.children}
-    </formContext.Provider>
+    </FormContext.Provider>
   );
 };
 

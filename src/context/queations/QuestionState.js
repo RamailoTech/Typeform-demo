@@ -1,13 +1,13 @@
 import React from "react";
-import questionContext from "./QuestionContext";
+import QuestionContext from "./QuestionContext";
 
 const QuestionState = (props) => {
   const questions = [{}];
 
   return (
-    <questionContext.Provider value={questions}>
+    <QuestionContext.Provider value={questions}>
       {props.children}
-    </questionContext.Provider>
+    </QuestionContext.Provider>
   );
 };
 
