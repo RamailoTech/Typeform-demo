@@ -1,16 +1,18 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import "../styles/firstpage.css"
-import {Grid,Box,TextField,Button} from '@mui/material';
+import {Grid,Box,Button} from '@mui/material';
 import flower from '../images/flower.jpg'
 import CheckIcon from '@mui/icons-material/Check';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-export const Firstpage = () => {
+export const Firstpage = ({items}) => {
+ 
   return (
     <div className="wrapper">
       <Grid container spacing={0}>
         <Grid item xs={6} className="wrapper-grid1">
           <Box className="box-grid">
-            <p className="grid-question"><span>1</span> Hello, what's your name?</p>
+                <p className="grid-question"><span>1</span><ArrowForwardIcon color='primary' sx={{fontSize:"14px"}}/>{items.question}</p>   
             <input
               type="text"
               className="answer_input"
