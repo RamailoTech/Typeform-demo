@@ -1,0 +1,31 @@
+.text_answer_input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #b3c7e7;
+  margin-bottom: 15px;
+  width: 100%;
+  font-size: 30px;
+  padding: 0 0 8px 0px;
+  color: #0445af;
+}
+
+.text_answer_input:focus {
+  border-bottom: 3px solid #0445af;
+}
+
+.text_answer_input::placeholder {
+  color: #b3c7e7;
+}
+
+.radio_input_button {
+  padding: 10px;
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 4px;
+  border-color: #0445af;
+  color: #0445af;
+
+  background-color: #e5ecf7;
+}
