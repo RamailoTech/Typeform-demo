@@ -1,13 +1,22 @@
+.translatepage{
+  transform:translateY(200px)
+}
 .wrapper-grid1 {
   position: relative;
 }
 .wrapper-grid2{
   position: relative;
 }
-.btn-banner{
+.btn-banner1{
   position: absolute;
   bottom:10%;
   left:65%;
+  
+}
+.btn-banner2{
+  position: absolute;
+  bottom:10%;
+  left:15%;
   
 }
 .box-grid {

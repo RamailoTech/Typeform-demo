@@ -1,18 +1,10 @@
-import { Firstpage } from "./pages";
-import React,{ useContext } from 'react'
-import QuestionContext from "./context/queations/QuestionContext";
+import React from "react";
+import { Form } from "./pages/Form";
 
 function App() {
-  const questions = useContext(QuestionContext)
   return (
     <div className="App">
-      {
-        questions.map((items)=>{
-          return <Firstpage items={items}/>
-         
-        })
-      }
-   
+      <Form />
     </div>
   );
 }

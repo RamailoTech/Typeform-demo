@@ -3,13 +3,11 @@ import "./autocompleteInput.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useComponentVisible from "../../../hooks/hook";
-const AutoCompleteInput = () => {
+const AutoCompleteInput = ({ options }) => {
   const inputRef = useRef();
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
-
-  let options = ["hello", "hi", "the lord of ring", "Logan"];
 
   const handleChange = () => {
     setIsComponentVisible(true);
