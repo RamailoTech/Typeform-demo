@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 
-export const RadioInput = ({ onClick, options }) => {
+ const MulitipleChoice = ({ onClick, options }) => {
   const [active, setActive] = useState(false);
 
   return (
@@ -21,3 +21,4 @@ export const RadioInput = ({ onClick, options }) => {
     </button>
   );
 };
+export default MulitipleChoice;
