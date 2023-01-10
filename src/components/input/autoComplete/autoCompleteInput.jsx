@@ -74,7 +74,6 @@ export const Option = ({ option, setValue }) => {
   return (
     <div ref={ref} className="option_wrapper">
       {option.map((op, index) => {
-        console.log(op);
         return (
           <span
             ref={ref}
