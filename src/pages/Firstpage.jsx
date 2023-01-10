@@ -5,6 +5,7 @@ import flower from "../images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
 import { TextInput } from "../components/input/textInput/inputs";
 import { RadioInput } from "../components/input/radioInput/RadioInput";
+import AutoCompleteInput from "../components/input/autoComplete/autoCompleteInput";
 
 export const Firstpage = () => {
   return (
@@ -16,7 +17,11 @@ export const Firstpage = () => {
               <span>1</span> Hello, what's your name?
             </p>
             <TextInput />
-            <RadioInput />
+            <RadioInput option={"Terrific!"} />
+            <RadioInput option={"Not good"} />
+            <RadioInput option={"Not Bad"} />
+            <AutoCompleteInput />
+
             <Button variant="contained" endIcon={<CheckIcon />}>
               OK
             </Button>
