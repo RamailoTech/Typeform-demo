@@ -7,16 +7,15 @@ import { TextInput } from "../components/input/textInput/inputs";
 import { RadioInput } from "../components/input/radioInput/RadioInput";
 import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
-export const Formpage = ({ items }) => {
-  const [pages, SetPages] = useState(false);
 
+export const Formpage = ({ items, activePage, pageno }) => {
   return (
-    <div className={`wrapper ${pages && `translatepage`}`}>
+    <div  style={{transform:`translateY(-${activePage*100}%)`}} className="transition-ease-in-out">
       <Grid container spacing={0}>
         <Grid item xs={6} className="wrapper-grid1">
           <Box className="box-grid">
             <p className="grid-question">
-              <span>1</span>
+              <span>{pageno+1}</span>
               <ArrowForwardIcon color="primary" sx={{ fontSize: "14px" }} />
               {items.question}
             </p>
@@ -39,17 +38,9 @@ export const Formpage = ({ items }) => {
         </Grid>
         <Grid item xs={6} className="wrapper-grid2">
           <img src={flower} alt="flower" />
-          <Button variant="contained" className="btn-banner1">
-            Powered by Typeform
-          </Button>
-          <Button
-            variant="contained"
-            className="btn-banner2"
-            endIcon={<CheckIcon />}
-            onClick={() => SetPages(true)}
-          ></Button>
+         
         </Grid>
       </Grid>
     </div>
-  );
-};
+  )
+}
