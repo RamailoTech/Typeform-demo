@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -7,8 +7,12 @@ import { TextInput } from "../components/input/textInput/inputs";
 import { RadioInput } from "../components/input/radioInput/RadioInput";
 import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
+import FormContext from "../context/form/FormContext";
+import QuestionContext from "../context/questions/QuestionContext";
 
 export const Formpage = ({ items, activePage, pageno }) => {
+  const questions = useContext(QuestionContext)
+  const { page, setPage } = useContext(FormContext)
   return (
     <div  style={{transform:`translateY(-${activePage*100}%)`}} className="transition-ease-in-out">
       <Grid container spacing={0}>
@@ -30,7 +34,7 @@ export const Formpage = ({ items, activePage, pageno }) => {
             )}
 
             <div>
-              <Button variant="contained" endIcon={<CheckIcon />}>
+              <Button variant="contained" className="grid-button" endIcon={<CheckIcon />}   onClick={() => setPage(Math.min(page + 1, questions.length - 1))}>
                 OK
               </Button>
             </div>
