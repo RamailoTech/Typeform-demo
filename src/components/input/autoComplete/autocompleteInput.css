@@ -1,0 +1,54 @@
+.autocomplete_input_wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.autocomplete_text_answer_input {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #b3c7e7;
+  margin-bottom: 15px;
+  font-size: 30px;
+  padding: 0 0 8px 0px;
+  color: #0445af;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.autocomplete_text_answer_input:focus {
+  border-bottom: 3px solid #0445af;
+}
+
+.autocomplete_text_answer_input::placeholder {
+  color: #b3c7e7;
+}
+
+.expand_icon {
+  right: 0;
+  position: absolute;
+  cursor: pointer;
+}
+.option_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  padding: 0px 8px;
+  padding-bottom: 10px;
+  border-bottom: 3px dashed #0445af;
+  z-index: 999;
+}
+
+.option_text {
+  border: 2px solid #0445af;
+  background-color: #b3c7e7;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  color: #0445af;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 999;
+}
