@@ -1,0 +1,25 @@
+.date_input_wrapper {
+  color: #b0c4e6;
+  font-size: 30px;
+}
+
+.date_input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #b0c4e6;
+  font-size: 30px;
+  color: #0445af;
+  margin: 0 10px;
+}
+.date_input::placeholder {
+  color: #b0c4e6;
+}
+
+.day,
+.month {
+  max-width: 60px;
+}
+
+.year {
+  width: 120px;
+}

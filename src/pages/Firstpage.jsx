@@ -4,6 +4,7 @@ import { Grid, Box, Button } from "@mui/material";
 import flower from "../images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { DateInput } from "../components/dateInput";
 
 export const Firstpage = ({ items }) => {
   return (
@@ -21,6 +22,7 @@ export const Firstpage = ({ items }) => {
               className="answer_input"
               placeholder="Type your answer here..."
             />
+            <DateInput />
             <Button variant="contained" endIcon={<CheckIcon />}>
               OK
             </Button>
