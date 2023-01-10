@@ -11,8 +11,7 @@ export const DateInput = () => {
     let name = e.target.name;
     let value = e.target.value;
     if (name === "month") {
-      console.log(name);
-      console.log(value);
+      ;
 
       if (parseInt(value) > 12) {
         setDate({ ...date, [name]: 12 });
