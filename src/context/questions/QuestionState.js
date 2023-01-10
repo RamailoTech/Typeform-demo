@@ -7,24 +7,32 @@ const QuestionState = (props) => {
      id: 0,
       question: "Hello, what's your name?",
       answer: {
-        type: "radio",
-        options: ["option1", "option2"],
+        type: "text",
+        
       }
     },
     {
-      id: 0,
-       question: "string here",
+      id: 1,
+       question: "Gender",
        answer: {
          type: "radio",
-         options: ["option1", "option2"],
+         options: ["Male", "Female"],
        }
      },
      {
-      id: 0,
-       question: "string here",
+      id: 2,
+       question: "Multiple Choice Question",
        answer: {
-         type: "radio",
-         options: ["option1", "option2"],
+         type: "multiple_choice",
+         options: ["option1", "option2","option3","option4"],
+       }
+     },
+     {
+      id: 3,
+       question: "DropDown",
+       answer: {
+         type: "dropdown",
+         options: ["option1", "option2","option3","option4"],
        }
      }
 ];
