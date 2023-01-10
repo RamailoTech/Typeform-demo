@@ -1,20 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
 import { OptionList } from "../../../utils/option";
 
-export const RadioInput = ({ options }) => {
+export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
 
   const { setFormValue, formValue } = useContext(FormContext);
   const handleClick = (e, i) => {
-    console.log(e.target, i);
-    setFormValue(e.target.innerText);
+    setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
   };
+  console.log(formValue);
 
-  console.log({ formValue });
+  // useEffect(()=>{
+  //   setFormValue({...formValue,radio:})
+  // })
+
   return (
     <>
       {options.map((op, i) => {
