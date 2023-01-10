@@ -18,7 +18,7 @@ const AutoCompleteInput = ({ options, question }) => {
     setValue(() => curr);
   };
   useEffect(() => {
-    setFormValue([...formValue, , { question, answer: value }]);
+    setFormValue({ ...formValue, [question]: value });
   }, [value, question]);
 
   return (

@@ -6,7 +6,7 @@ export const TextInput = ({ question }) => {
   const { formValue, setFormValue } = useContext(FormContext);
 
   const handleChange = (e) => {
-    setFormValue([...formValue, { question, answer: e.target.value }]);
+    setFormValue({ ...formValue, [question]: e.target.value });
   };
   return (
     <input

@@ -9,7 +9,7 @@ export const RadioInput = ({ options, question }) => {
 
   const { setFormValue, formValue } = useContext(FormContext);
   const handleClick = (e, i) => {
-    setFormValue([...formValue, { [question]: e.target.innerText }]);
+    setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
   };
   console.log(formValue);
