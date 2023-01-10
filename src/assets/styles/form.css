@@ -1,5 +1,5 @@
-.translatepage{
-  transform:translateY(200px)
+.slidetotop{
+  transform:translateY(-100%)
 }
 .wrapper-grid1 {
   position: relative;
@@ -10,13 +10,20 @@
 .btn-banner1{
   position: absolute;
   bottom:10%;
-  left:65%;
+  left:62%;
   
 }
 .btn-banner2{
   position: absolute;
   bottom:10%;
-  left:15%;
+  left:5%;
+  color:aqua;
+  
+}
+.btn-banner3{
+  position: absolute;
+  bottom:10%;
+  left:8%;
   
 }
 .box-grid {

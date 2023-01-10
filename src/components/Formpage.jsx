@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { Grid, Box, Button } from "@mui/material";
+import React,{useContext} from "react";
+import { Grid, Box, Button} from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -7,11 +7,12 @@ import {TextInput} from "../components/input/textInput/inputs"
 import {RadioInput} from "../components/input/radioInput/RadioInput";
 import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
-export const Formpage = ({ items }) => {
-  const[pages, SetPages]=useState(false)
- 
+import FormContext from "../context/form/FormContext";
+
+export const Formpage = ({ items,pageno }) => {
+  const {page,setPage}=useContext(FormContext)
   return (
-    <div className={`wrapper ${pages && `translatepage`}`}>
+    <div className={`wrapper`}>
       <Grid container spacing={0}>
         <Grid item xs={6} className="wrapper-grid1">
           <Box className="box-grid">
@@ -34,10 +35,15 @@ export const Formpage = ({ items }) => {
         <Grid item xs={6} className="wrapper-grid2">
           <img src={flower} alt="flower" />
           <Button variant="contained" className="btn-banner1">
-            Powered by Typeform
+            Powered by Ramailo.tech
           </Button>
-          <Button variant="contained" className="btn-banner2" endIcon={<CheckIcon />} onClick={()=>SetPages(true)}>
+          <Button variant="contained" className="btn-banner2" onClick={()=>setPage(page-1)}>
+          <CheckIcon/>
           </Button>
+          <Button variant="contained" className="btn-banner2" onClick={()=>setPage(page-1)} >
+          <CheckIcon/>
+          </Button>
+          
         </Grid>
       </Grid>
     </div>
