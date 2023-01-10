@@ -2,23 +2,41 @@ import React, { useState } from "react";
 import "./dateInput.css";
 
 export const DateInput = () => {
-  const [error, setError] = useState("");
   const [date, setDate] = useState({
-    day: null,
-    month: null,
-    year: null,
+    day: "",
+    month: "",
+    year: "",
   });
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
     if (name === "month") {
       console.log(name);
-      console.log(value.length);
+      console.log(value);
 
-      if (value.length > 2) {
-        return console.log(value.length);
+      if (parseInt(value) > 12) {
+        setDate({ ...date, [name]: 12 });
+      } else if (parseInt(value) === 0) {
+        setDate({ ...date, [name]: 1 });
+      } else {
+        setDate({ ...date, [name]: value });
       }
-      //   setDate({ ...date, name: value });
+    }
+    if (name === "day") {
+      if (parseInt(value) > 31) {
+        setDate({ ...date, [name]: 31 });
+      } else if (parseInt(value) === 0) {
+        setDate({ ...date, [name]: 1 });
+      } else {
+        setDate({ ...date, [name]: value });
+      }
+    }
+    if (name === "year") {
+      if (value.length > 4) {
+        setDate({ ...date, [name]: new Date().getFullYear() });
+      } else {
+        setDate({ ...date, [name]: value });
+      }
     }
   };
   return (
@@ -39,7 +57,8 @@ export const DateInput = () => {
         type="number"
         className="date_input day"
         placeholder="DD"
-        min={0}
+        value={date.day}
+        min={1}
         onChange={handleChange}
       />
       /
@@ -48,7 +67,7 @@ export const DateInput = () => {
         className="date_input year"
         placeholder="YYYY"
         type="number"
-        min={0}
+        value={date.year}
         onChange={handleChange}
       />
     </div>

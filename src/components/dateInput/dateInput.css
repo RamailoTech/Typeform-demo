@@ -6,13 +6,16 @@
 .date_input {
   border: none;
   outline: none;
-  border-bottom: 1px solid #b0c4e6;
+  border-bottom: 2px solid #b0c4e6;
   font-size: 30px;
   color: #0445af;
   margin: 0 10px;
 }
 .date_input::placeholder {
   color: #b0c4e6;
+}
+.date_input:focus {
+  border-bottom: 2px solid #0445af;
 }
 
 .day,
@@ -21,5 +24,5 @@
 }
 
 .year {
-  width: 120px;
+  width: 110px;
 }
