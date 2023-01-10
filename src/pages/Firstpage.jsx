@@ -23,8 +23,9 @@ export const Firstpage = ({items}) => {
            </Button>
           </Box>
         </Grid>
-        <Grid item xs={6} className="images">
+        <Grid item xs={6} className="wrapper-grid2">
           <img src={flower} alt="flower" />
+          <Button variant="contained" className="btn-banner">Powered by Typeform</Button>
         </Grid>
       </Grid>
     </div>

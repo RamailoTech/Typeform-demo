@@ -5,7 +5,7 @@ const QuestionState = (props) => {
   const questions = [
     {
      id: 0,
-      question: "string here",
+      question: "Hello, what's your name?",
       answer: {
         type: "radio",
         options: ["option1", "option2"],
