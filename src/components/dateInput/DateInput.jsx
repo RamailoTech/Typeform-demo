@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext,useEffect } from "react";
 import "./dateInput.css";
+import FormContext from '../../context/form/FormContext';
 
-export const DateInput = () => {
+export const DateInput = ({question}) => {
+  const {formValue,setFormValue} = useContext(FormContext)
   const [date, setDate] = useState({
     day: "",
     month: "",
@@ -37,7 +39,12 @@ export const DateInput = () => {
         setDate({ ...date, [name]: value });
       }
     }
+    
   };
+  useEffect(()=>{
+    let dates=`${date.day}/${date.month}/${date.year}`
+    setFormValue({...formValue,[question]:dates})
+ },[date.day,date.month,date.year])
   return (
     <div className="date_input_wrapper">
       <input
