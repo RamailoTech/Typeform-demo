@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import "./autocompleteInput.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useComponentVisible from "../../../hooks/hook";
-const AutoCompleteInput = ({ options }) => {
+import FormContext from "../../../context/form/FormContext";
+const AutoCompleteInput = ({ options, question }) => {
+  const { formValue, setFormValue } = useContext(FormContext);
+
   const inputRef = useRef();
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
@@ -12,9 +15,11 @@ const AutoCompleteInput = ({ options }) => {
   const handleChange = () => {
     setIsComponentVisible(true);
     let curr = inputRef.current.value;
-    console.log(curr);
-    setValue(curr);
+    setValue(() => curr);
   };
+  useEffect(() => {
+    setFormValue([...formValue, , { question, answer: value }]);
+  }, [value, question]);
 
   return (
     <>
@@ -74,7 +79,6 @@ export const Option = ({ option, setValue }) => {
   return (
     <div ref={ref} className="option_wrapper">
       {option.map((op, index) => {
-        console.log(op);
         return (
           <span
             ref={ref}

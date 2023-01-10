@@ -1,20 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import { OptionList } from "../../../utils/option";
 import FormContext from "../../../context/form/FormContext";
 
-const MultipleChoice = ({ onClick, options }) => {
+const MultipleChoice = ({ options, question }) => {
   const [active, setActive] = useState([]);
-  const { setFormValue } = useContext(FormContext);
+  // const [selectedAnswer, setSelectedAnswer] = useState([]);
+  const { formValue, setFormValue } = useContext(FormContext);
 
   const handleClick = (e, i) => {
-    setFormValue(e.target.innerText);
     if (active.includes(i)) {
       return setActive(active.filter((curr) => curr !== i));
     }
     setActive([...active, i]);
   };
+
+  let selectedAnswer = active.map((i) => {
+    return options[i];
+  });
+
+  useEffect(() => {
+    setFormValue([formValue, { question, answer: selectedAnswer }]);
+  }, [active, question]);
+  console.log("selectedAnswer", selectedAnswer);
 
   return (
     <>

@@ -10,23 +10,35 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 
 export const Formpage = ({ items, activePage, pageno }) => {
   return (
-    <div  style={{transform:`translateY(-${activePage*100}%)`}} className="transition-ease-in-out">
+    <div
+      style={{ transform: `translateY(-${activePage * 100}%)` }}
+      className="transition-ease-in-out"
+    >
       <Grid container spacing={0}>
         <Grid item xs={6} className="wrapper-grid1">
           <Box className="box-grid">
             <p className="grid-question">
-              <span>{pageno+1}</span>
+              <span>{pageno + 1}</span>
               <ArrowForwardIcon color="primary" sx={{ fontSize: "14px" }} />
               {items.question}
             </p>
             {items.answer.type === "text" ? (
-              <TextInput />
+              <TextInput question={items.question} />
             ) : items.answer.type === "radio" ? (
-              <RadioInput options={items.answer.options} />
+              <RadioInput
+                question={items.question}
+                options={items.answer.options}
+              />
             ) : items.answer.type === "dropdown" ? (
-              <Autocomplete options={items.answer.options} />
+              <Autocomplete
+                options={items.answer.options}
+                question={items.question}
+              />
             ) : (
-              <MultipleChoice options={items.answer.options} />
+              <MultipleChoice
+                options={items.answer.options}
+                question={items.question}
+              />
             )}
 
             <div>
@@ -38,9 +50,8 @@ export const Formpage = ({ items, activePage, pageno }) => {
         </Grid>
         <Grid item xs={6} className="wrapper-grid2">
           <img src={flower} alt="flower" />
-         
         </Grid>
       </Grid>
     </div>
-  )
-}
+  );
+};
