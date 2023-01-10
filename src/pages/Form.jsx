@@ -1,20 +1,20 @@
-import React, { useContext } from "react"
-import QuestionContext from "../context/questions/QuestionContext"
-import { Grid, Box, Button, ButtonGroup } from "@mui/material"
-import { Formpage } from "../components/Formpage"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import ExpandLessIcon from "@mui/icons-material/ExpandLess"
-import FormContext from "../context/form/FormContext"
-import "../assets/styles/form.css"
+import React, { useContext } from "react";
+import QuestionContext from "../context/questions/QuestionContext";
+import { Button, ButtonGroup } from "@mui/material";
+import { Formpage } from "../components/Formpage";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import FormContext from "../context/form/FormContext";
+import "../assets/styles/form.css";
 
 export const Form = () => {
-  const questions = useContext(QuestionContext)
-  const { page, setPage } = useContext(FormContext)
+  const questions = useContext(QuestionContext);
+  const { page, setPage } = useContext(FormContext);
 
   return (
     <div className={`wrapper`}>
       {questions.map((items, index) => {
-        return <Formpage items={items} pageno={index} activePage={page} />
+        return <Formpage items={items} pageno={index} activePage={page} />;
       })}
       <div className="navigation">
         <ButtonGroup
@@ -40,5 +40,5 @@ export const Form = () => {
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
