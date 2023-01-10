@@ -21,7 +21,7 @@ export const Formpage = ({ items }) => {
               {items.question}
             </p>
             {
-              items.answer.type==="text"?<TextInput/>:items.answer.type==="radio"?<RadioInput/>:items.answer.type==="dropdown"?<Autocomplete/>:<MultipleChoice/>
+              items.answer.type==="text"?<TextInput/>:items.answer.type==="radio"?<RadioInput options={items.answer.options}/>:items.answer.type==="dropdown"?<Autocomplete/>:<MultipleChoice options={items.answer.options}/>
             }
           
            <div>
