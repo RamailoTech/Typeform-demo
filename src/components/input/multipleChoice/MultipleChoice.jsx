@@ -21,9 +21,10 @@ const MultipleChoice = ({ options, question }) => {
   });
 
   useEffect(() => {
-    setFormValue({ ...formValue, [question]: selectedAnswer });
+    if (selectedAnswer.length > 0) {
+      setFormValue({ ...formValue, [question]: selectedAnswer });
+    }
   }, [active, question]);
- 
 
   return (
     <>

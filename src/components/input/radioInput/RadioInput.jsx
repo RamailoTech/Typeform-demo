@@ -7,15 +7,12 @@ import { OptionList } from "../../../utils/option";
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
 
-  const { setFormValue, formValue ,page,setPage} = useContext(FormContext);
+  const { setFormValue, formValue, page, setPage } = useContext(FormContext);
   const handleClick = (e, i) => {
     setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
-    setPage(page + 1)
+    setPage(page + 1);
   };
-
-
-  
 
   return (
     <>
