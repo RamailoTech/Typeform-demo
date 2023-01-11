@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
@@ -7,10 +7,11 @@ import { OptionList } from "../../../utils/option";
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
 
-  const { setFormValue, formValue } = useContext(FormContext);
+  const { setFormValue, formValue ,page,setPage} = useContext(FormContext);
   const handleClick = (e, i) => {
     setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
+    setPage(page + 1)
   };
 
 

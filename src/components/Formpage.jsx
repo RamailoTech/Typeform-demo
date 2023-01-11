@@ -7,7 +7,7 @@ import { TextInput } from "../components/input/textInput/inputs";
 import { RadioInput } from "../components/input/radioInput/RadioInput";
 import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
-import {DateInput} from "../components/dateInput/DateInput";
+import {DateInput} from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
 import {Link} from "react-router-dom";
