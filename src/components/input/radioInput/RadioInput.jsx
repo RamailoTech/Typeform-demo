@@ -9,9 +9,8 @@ export const RadioInput = ({ options, question }) => {
 
   const { setFormValue, formValue, page, setPage } = useContext(FormContext);
   const handleClick = (e, i) => {
-    setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
-    setPage(page + 1);
+    setFormValue({ ...formValue, [question]: e.target.innerText });
   };
 
   return (

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const FormState = (props) => {
   const [page, setPage] = useState(0);
   //to show question numbers
-  const [visiblePageNumber, setVisiblePageNumber] = useState(0);
+  const [visiblePageNumber, setVisiblePageNumber] = useState(1);
   //conditionally rendered question changes page length
   const [pageLength, setPageLength] = useState(0);
 
