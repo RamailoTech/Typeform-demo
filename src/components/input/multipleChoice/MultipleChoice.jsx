@@ -23,7 +23,7 @@ const MultipleChoice = ({ options, question }) => {
   useEffect(() => {
     setFormValue({ ...formValue, [question]: selectedAnswer });
   }, [active, question]);
-  console.log("selectedAnswer", selectedAnswer);
+ 
 
   return (
     <>

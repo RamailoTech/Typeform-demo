@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import QuestionContext from "../context/questions/QuestionContext"
-import { Grid, Box, Button, ButtonGroup } from "@mui/material"
+import { Button, ButtonGroup } from "@mui/material"
 import { Formpage } from "../components/Formpage"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import ExpandLessIcon from "@mui/icons-material/ExpandLess"
@@ -24,18 +24,20 @@ export const Form = () => {
           <Button
             onClick={() => setPage(Math.max(page - 1, 0))}
             disabled={page === 0}
+            sx={{backgroundColor:"#0445af"}}
           >
             <ExpandLessIcon />
           </Button>
           <Button
             onClick={() => setPage(Math.min(page + 1, questions.length - 1))}
             disabled={page === questions.length - 1}
+            sx={{backgroundColor:"#0445af"}}
           >
             <ExpandMoreIcon />
           </Button>
         </ButtonGroup>
 
-        <Button variant="contained" className="btn-banner1">
+        <Button variant="contained"  sx={{backgroundColor:"#0445af "}}>
           Powered by Ramailo.tech
         </Button>
       </div>

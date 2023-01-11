@@ -12,11 +12,9 @@ export const RadioInput = ({ options, question }) => {
     setFormValue({ ...formValue, [question]: e.target.innerText });
     setActive(i);
   };
-  console.log(formValue);
 
-  // useEffect(()=>{
-  //   setFormValue({...formValue,radio:})
-  // })
+
+  
 
   return (
     <>

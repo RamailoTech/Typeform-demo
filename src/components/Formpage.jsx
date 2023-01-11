@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -7,8 +7,15 @@ import { TextInput } from "../components/input/textInput/inputs";
 import { RadioInput } from "../components/input/radioInput/RadioInput";
 import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
+import {DateInput} from "../components/dateInput/DateInput";
+import FormContext from "../context/form/FormContext";
+import QuestionContext from "../context/questions/QuestionContext";
+import {Link} from "react-router-dom";
+
 
 export const Formpage = ({ items, activePage, pageno }) => {
+  const questions = useContext(QuestionContext)
+  const { page, setPage } = useContext(FormContext)
   return (
     <div
       style={{ transform: `translateY(-${activePage * 100}%)` }}
@@ -30,21 +37,24 @@ export const Formpage = ({ items, activePage, pageno }) => {
                 options={items.answer.options}
               />
             ) : items.answer.type === "dropdown" ? (
-              <Autocomplete
-                options={items.answer.options}
-                question={items.question}
-              />
-            ) : (
-              <MultipleChoice
-                options={items.answer.options}
-                question={items.question}
-              />
+              <Autocomplete  question={items.question} options={items.answer.options} />
+            ) : items.answer.type === "dateInput" ? (
+              <DateInput  question={items.question}/>
+            ): (
+              <MultipleChoice options={items.answer.options}  question={items.question} />
             )}
 
             <div>
-              <Button variant="contained" endIcon={<CheckIcon />}>
-                OK
-              </Button>
+              {
+                (page===questions.length-1)?(
+                 <Link to="/typeform/result" ><Button variant="contained" className="grid-button">Submit</Button></Link>
+                ):
+                <Button variant="contained" className="grid-button" endIcon={<CheckIcon />}   
+                onClick={() => setPage(Math.min(page + 1, questions.length - 1))}>
+                  OK
+                </Button>
+              }
+             
             </div>
           </Box>
         </Grid>

@@ -13,7 +13,7 @@ const QuestionState = (props) => {
     },
     {
       id: 1,
-       question: "Gender",
+       question: "Select your gender",
        answer: {
          type: "radio",
          options: ["Male", "Female"],
@@ -21,18 +21,25 @@ const QuestionState = (props) => {
      },
      {
       id: 2,
-       question: "Multiple Choice Question",
+       question: "Which is the best way to eat healthier",
        answer: {
          type: "multiple_choice",
-         options: ["option1", "option2","option3","option4"],
+         options: ["Vegan diet", "Protein-rich food","Balanced diet","Only fresh fruits"],
        }
      },
      {
       id: 3,
-       question: "DropDown",
+       question: "Select your favourite color",
        answer: {
          type: "dropdown",
-         options: ["option1", "option2","option3","option4"],
+         options: ["Blue", "Pink","Red","White"],
+       }
+     },
+     {
+      id: 4,
+       question: "Enter your birth date",
+       answer: {
+         type: "dateInput",  
        }
      }
 ];
