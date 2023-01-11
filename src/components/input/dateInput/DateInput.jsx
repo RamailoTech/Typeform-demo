@@ -1,9 +1,9 @@
-import React, { useState,useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./dateInput.css";
-import FormContext from '../../../context/form/FormContext';
+import FormContext from "../../../context/form/FormContext";
 
-export const DateInput = ({question}) => {
-  const {formValue,setFormValue} = useContext(FormContext)
+export const DateInput = ({ question }) => {
+  const { formValue, setFormValue } = useContext(FormContext);
   const [date, setDate] = useState({
     day: "",
     month: "",
@@ -13,8 +13,6 @@ export const DateInput = ({question}) => {
     let name = e.target.name;
     let value = e.target.value;
     if (name === "month") {
-      ;
-
       if (parseInt(value) > 12) {
         setDate({ ...date, [name]: 12 });
       } else if (parseInt(value) === 0) {
@@ -39,12 +37,13 @@ export const DateInput = ({question}) => {
         setDate({ ...date, [name]: value });
       }
     }
-    
   };
-  useEffect(()=>{
-    let dates=`${date.day}/${date.month}/${date.year}`
-    setFormValue({...formValue,[question]:dates})
- },[date.day,date.month,date.year])
+  useEffect(() => {
+    if (date.day && date.month && date.year) {
+      let dates = `${date.day}/${date.month}/${date.year}`;
+      setFormValue({ ...formValue, [question]: dates });
+    }
+  }, [date.day, date.month, date.year]);
   return (
     <div className="date_input_wrapper">
       <input
