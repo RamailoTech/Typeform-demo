@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from "react";
 import "./dateInput.css";
-import FormContext from '../../context/form/FormContext';
+import FormContext from '../../../context/form/FormContext';
 
 export const DateInput = ({question}) => {
   const {formValue,setFormValue} = useContext(FormContext)
