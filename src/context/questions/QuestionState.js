@@ -16,6 +16,33 @@ const QuestionState = (props) => {
       answer: {
         type: "radio",
         options: ["Male", "Female"],
+        children: {
+          Male: [
+            {
+              id: 10,
+              question: "Your favourite Crickter?",
+              answer: {
+                type: "text",
+              },
+            },
+            {
+              id: 12,
+              question: "Your favourite Footballer?",
+              answer: {
+                type: "text",
+              },
+            },
+          ],
+          Female: [
+            {
+              id: 11,
+              question: "Your favourite Crickter?",
+              answer: {
+                type: "text",
+              },
+            },
+          ],
+        },
       },
     },
     {

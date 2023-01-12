@@ -69,3 +69,10 @@
   background-color: #0445af;
   color: #fff;
 }
+
+@media screen and (min-width: 1400px) {
+  .radio_input_button {
+    min-width: 300px;
+    font-size: 25px;
+  }
+}

@@ -10,17 +10,11 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
-import { Link, Navigate } from "react-router-dom";
-import { NavigateNext } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export const Formpage = ({ question, navigateNext }) => {
-  const {
-    visiblePageNumber,
-    setVisiblePageNumber,
-    setPageLength,
-    pageLength,
-    formValue,
-  } = useContext(FormContext);
+  const { visiblePageNumber, setPageLength, pageLength, formValue } =
+    useContext(FormContext);
   let questions = useContext(QuestionContext);
 
   const renderForm = (item) => {
@@ -93,8 +87,9 @@ export const Formpage = ({ question, navigateNext }) => {
     const selectedOption = formValue[question.question];
     if (selectedOption !== undefined) {
       let children = question.answer.children[selectedOption];
-      setPageLength(questions.length + children.length);
-
+      let newPage = pageLength + children.length;
+      debugger;
+      setPageLength(newPage);
       return children.map((child, i) => {
         return renderForm(child);
       });
