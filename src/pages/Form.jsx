@@ -1,35 +1,34 @@
-import React, { useContext, useEffect } from "react"
-import QuestionContext from "../context/questions/QuestionContext"
-import { Button, ButtonGroup } from "@mui/material"
-import { Formpage } from "../components/Formpage"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import ExpandLessIcon from "@mui/icons-material/ExpandLess"
-import FormContext from "../context/form/FormContext"
-import "../assets/styles/form.css"
-import {navigatePrev,navigateNext} from "../utils/navigate"
+import React, { useContext, useEffect } from "react";
+import QuestionContext from "../context/questions/QuestionContext";
+import { Button, ButtonGroup } from "@mui/material";
+import { Formpage } from "../components/Formpage";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import FormContext from "../context/form/FormContext";
+import "../assets/styles/form.css";
+import { navigatePrev, navigateNext } from "../utils/navigate";
 export const Form = () => {
-  let questions = useContext(QuestionContext)
+  let questions = useContext(QuestionContext);
   const {
-    progress,
-     setProgress,
+    setProgress,
     visiblePageNumber,
     setVisiblePageNumber,
     setPageLength,
     pageLength,
-  } = useContext(FormContext)
+  } = useContext(FormContext);
 
   useEffect(() => {
     const arrayWithoutChildren = questions.filter(
       (question) => question.parent === undefined
-    )
+    );
 
-    setPageLength(arrayWithoutChildren.length)
-  }, [questions, setPageLength])
+    setPageLength(arrayWithoutChildren.length);
+  }, [questions, setPageLength]);
 
   return (
     <div className={`wrapper`}>
       {questions.map((question, index) => {
-        return <Formpage question={question} navigateNext={navigateNext} />
+        return <Formpage question={question} navigateNext={navigateNext} />;
       })}
       <div className="navigation">
         <ButtonGroup
@@ -38,9 +37,7 @@ export const Form = () => {
         >
           <Button
             onClick={() => {
-              navigatePrev(visiblePageNumber,setVisiblePageNumber)
-             
-             
+              navigatePrev(visiblePageNumber, setVisiblePageNumber);
             }}
             disabled={visiblePageNumber === 1}
             sx={{ backgroundColor: "#0445af" }}
@@ -49,9 +46,11 @@ export const Form = () => {
           </Button>
           <Button
             onClick={() => {
-              navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
-              var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
-              setProgress(progressbar)
+              navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber);
+              var progressbar = Math.floor(
+                (visiblePageNumber / pageLength) * 100
+              );
+              setProgress(progressbar);
             }}
             disabled={visiblePageNumber === pageLength}
             sx={{ backgroundColor: "#0445af" }}
@@ -65,5 +64,5 @@ export const Form = () => {
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
