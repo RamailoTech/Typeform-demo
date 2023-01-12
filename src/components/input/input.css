@@ -34,9 +34,7 @@
   margin-bottom: 5px;
   position: relative;
 }
-.radio_input_button:focus{
-border:2px solid #0445af;
-}
+
 .radio_input_button_option {
   border: 1px solid #0445af;
 
@@ -70,4 +68,14 @@ border:2px solid #0445af;
 .active_input .radio_input_button_option {
   background-color: #0445af;
   color: #fff;
+}
+@media screen and (min-width: 1400px){
+  .radio_input_button{
+    min-width: 300px;
+    font-size: 25px;
+  }
+  .text_answer_input {
+    font-size: 40px;
+    
+  }
 }

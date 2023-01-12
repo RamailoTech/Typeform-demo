@@ -11,7 +11,7 @@ import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
 import { Link } from "react-router-dom";
-import LinearProgress from "@mui/material/LinearProgress";
+
 
 export const Formpage = ({ question, navigateNext,index }) => {
   const {
@@ -20,7 +20,6 @@ export const Formpage = ({ question, navigateNext,index }) => {
     setPageLength,
     pageLength,
     formValue,
-    progress,
     setProgress,
   } = useContext(FormContext);
   let questions = useContext(QuestionContext);
@@ -35,13 +34,7 @@ export const Formpage = ({ question, navigateNext,index }) => {
 
     return (
       <>
-        <Box sx={{ width: "100%" }}>
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            sx={{ height: "8px" }}
-          />
-        </Box>
+       
         <div
           style={{
             transform: `translateY(-${(visiblePageNumber - 1) * 100}%)`,
@@ -89,7 +82,7 @@ export const Formpage = ({ question, navigateNext,index }) => {
                     <Button
                       variant="contained"
                       className="grid-button"
-                      endIcon={<CheckIcon />}
+                      endIcon={<CheckIcon  sx={{marginLeft:"-8px"}}/>}
                       onClick={handleChange}
                     >
                       OK

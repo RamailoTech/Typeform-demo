@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import QuestionContext from "../context/questions/QuestionContext";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup,Box } from "@mui/material";
 import { Formpage } from "../components/Formpage";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FormContext from "../context/form/FormContext";
 import "../assets/styles/form.css";
 import { navigatePrev, navigateNext } from "../utils/navigate";
+import LinearProgress from "@mui/material/LinearProgress";
+
 export const Form = () => {
   let questions = useContext(QuestionContext);
   const {
@@ -15,6 +17,7 @@ export const Form = () => {
     setVisiblePageNumber,
     setPageLength,
     pageLength,
+    progress,
   } = useContext(FormContext);
 
   useEffect(() => {
@@ -26,6 +29,14 @@ export const Form = () => {
   }, [questions, setPageLength]);
 
   return (
+    <>
+    <Box sx={{ width: "100%" }}>
+    <LinearProgress
+      variant="determinate"
+      value={progress}
+      sx={{ height: "8px" }}
+    />
+  </Box>
     <div className={`wrapper`}>
       {questions.map((question, index) => {
         return <Formpage question={question} navigateNext={navigateNext} index={index}/>;
@@ -64,5 +75,6 @@ export const Form = () => {
         </Button>
       </div>
     </div>
+    </>
   );
 };
