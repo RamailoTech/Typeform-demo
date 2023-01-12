@@ -6,6 +6,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import ExpandLessIcon from "@mui/icons-material/ExpandLess"
 import FormContext from "../context/form/FormContext"
 import "../assets/styles/form.css"
+import LinearProgress from "@mui/material/LinearProgress";
+import { Box  } from "@mui/material";
 
 export const Form = () => {
   let questions = useContext(QuestionContext)
@@ -17,6 +19,8 @@ export const Form = () => {
     setVisiblePageNumber,
     setPageLength,
     pageLength,
+    progress,
+   
   } = useContext(FormContext)
 
   const navigateNext = () => {
@@ -40,6 +44,14 @@ export const Form = () => {
   }, [questions, setPageLength])
 
   return (
+    <>
+    <Box sx={{ width: "100%" }}>
+      <LinearProgress
+        variant="determinate"
+        value={progress}
+        sx={{ height: "8px",postion:"fixed",top:"0px",zIndex:"999" }}
+      />
+    </Box>
     <div className={`wrapper`}>
       {questions.map((question, index) => {
         return <Formpage question={question} navigateNext={navigateNext} />
@@ -74,5 +86,6 @@ export const Form = () => {
         </Button>
       </div>
     </div>
+    </>
   )
 }

@@ -12,6 +12,7 @@ import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
 import { Link, Navigate } from "react-router-dom";
 import { NavigateNext } from "@mui/icons-material";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export const Formpage = ({ question, navigateNext }) => {
   const {
@@ -20,12 +21,25 @@ export const Formpage = ({ question, navigateNext }) => {
     setPageLength,
     pageLength,
     formValue,
+    progress,
+    setProgress,
+
   } = useContext(FormContext);
   let questions = useContext(QuestionContext);
+
+  const handleChange = () => {
+    navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber);
+    var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
+    setProgress(progressbar);
+  };
+
 
   const renderForm = (item) => {
     // console.log("render form item", item);
     return (
+      <>
+      
+
       <div
         style={{ transform: `translateY(-${(visiblePageNumber - 1) * 100}%)` }}
         className="transition-ease-in-out"
@@ -71,9 +85,7 @@ export const Formpage = ({ question, navigateNext }) => {
                     variant="contained"
                     className="grid-button"
                     endIcon={<CheckIcon />}
-                    onClick={() => {
-                      navigateNext();
-                    }}
+                    onClick={handleChange}
                   >
                     OK
                   </Button>
@@ -86,6 +98,7 @@ export const Formpage = ({ question, navigateNext }) => {
           </Grid>
         </Grid>
       </div>
+      </>
     );
   };
 
