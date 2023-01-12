@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
 import { OptionList } from "../../../utils/option";
+import QuestionContext from "../../../context/questions/QuestionContext";
 
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
-
+  const questions = useContext(QuestionContext)
+  
   const { setFormValue, formValue ,page,setPage} = useContext(FormContext);
   const handleClick = (e, i) => {
     setFormValue({ ...formValue, [question]: e.target.innerText });
@@ -15,7 +17,6 @@ export const RadioInput = ({ options, question }) => {
   };
 
 
-  
 
   return (
     <>
@@ -23,6 +24,7 @@ export const RadioInput = ({ options, question }) => {
         return (
           <button
             key={i}
+            // onKeyDown={handleKeyDown}
             className={`radio_input_button ${active === i && "active_input"}`}
           >
             <div className="radio_input_content_wrapper">

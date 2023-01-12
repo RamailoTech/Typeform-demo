@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState,useContext,useEffect } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -11,14 +11,30 @@ import {DateInput} from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
 import {Link} from "react-router-dom";
-
+import LinearProgress from '@mui/material/LinearProgress';
 
 export const Formpage = ({ items, activePage, pageno }) => {
   const questions = useContext(QuestionContext)
-  const { page, setPage } = useContext(FormContext)
+   
+  const { page, setPage,progress, setProgress } = useContext(FormContext)
+ 
+  
+  const handleClick = () => {
+    setPage(Math.min(page + 1, questions.length - 1))
+    let NewProgress=progress+100/questions.length
+    setProgress(NewProgress)
+  
+
+}
+
+
   return (
+    <>
+    <Box sx={{ width: '100%' }}>
+      <LinearProgress variant="determinate" value={progress} sx={{height:"8px",color:"#0445af"}}/>
+    </Box>
     <div
-      style={{ transform: `translateY(-${activePage * 100}%)` }}
+      style={{ transform: `translateY(-${activePage * 101}%)` }}
       className="transition-ease-in-out"
     >
       <Grid container spacing={0}>
@@ -49,8 +65,10 @@ export const Formpage = ({ items, activePage, pageno }) => {
                 (page===questions.length-1)?(
                  <Link to="/typeform/result" ><Button variant="contained" className="grid-button">Submit</Button></Link>
                 ):
-                <Button variant="contained" className="grid-button" endIcon={<CheckIcon />}   
-                onClick={() => setPage(Math.min(page + 1, questions.length - 1))}>
+                <Button variant="contained" className="grid-button" endIcon={<CheckIcon sx={{marginLeft:"-6px"}} />}   
+              
+                onClick={handleClick}>
+                 
                   OK
                 </Button>
               }
@@ -63,5 +81,6 @@ export const Formpage = ({ items, activePage, pageno }) => {
         </Grid>
       </Grid>
     </div>
+    </>
   );
 };

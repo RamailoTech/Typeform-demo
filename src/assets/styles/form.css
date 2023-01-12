@@ -1,6 +1,7 @@
 .transition-ease-in-out{
-  transition: 0.3s ease-in-out;
-  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  
 }
 .wrapper-grid1 {
   position: relative;
@@ -34,13 +35,16 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
+ 
 }
+
 .grid-button{
   margin-top: 18px !important;
   background-color:#0445af !important;
-  padding:6px 14px !important;;
-  font-size:16px !important;;
-  font-weight:700 !important;;
+  padding:6px 5px !important;
+  font-size:16px !important;
+  font-weight:700 !important;
+  text-decoration: none;
 }
 
 .wrapper .navigation{
@@ -48,7 +52,6 @@
   bottom: 0;
   right: 0;
   margin: 20px;
-
   display: flex;
   gap: 20px;
 }

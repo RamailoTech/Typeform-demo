@@ -9,7 +9,17 @@ import "../assets/styles/form.css"
 
 export const Form = () => {
   const questions = useContext(QuestionContext)
-  const { page, setPage } = useContext(FormContext)
+  const { page, setPage,progress,setProgress } = useContext(FormContext)
+  const handleClick1= () => {
+    setPage(Math.max(page - 1, 0))
+    let NewProgress=progress-100/questions.length
+    setProgress(NewProgress)
+ }
+ const handleClick2= () => {
+  setPage(Math.min(page + 1, questions.length - 1))
+  let NewProgress=progress+100/questions.length
+  setProgress(NewProgress)
+}
 
   return (
     <div className={`wrapper`}>
@@ -22,14 +32,15 @@ export const Form = () => {
           aria-label="outlined primary button group"
         >
           <Button
-            onClick={() => setPage(Math.max(page - 1, 0))}
+            
+            onClick={handleClick1}
             disabled={page === 0}
             sx={{backgroundColor:"#0445af"}}
           >
             <ExpandLessIcon />
           </Button>
           <Button
-            onClick={() => setPage(Math.min(page + 1, questions.length - 1))}
+            onClick={handleClick2}
             disabled={page === questions.length - 1}
             sx={{backgroundColor:"#0445af"}}
           >
