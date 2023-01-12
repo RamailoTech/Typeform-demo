@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import QuestionContext from "../context/questions/QuestionContext"
 import { Button, ButtonGroup } from "@mui/material"
 import { Formpage } from "../components/Formpage"
@@ -8,13 +8,41 @@ import FormContext from "../context/form/FormContext"
 import "../assets/styles/form.css"
 
 export const Form = () => {
-  const questions = useContext(QuestionContext)
-  const { page, setPage } = useContext(FormContext)
+  let questions = useContext(QuestionContext)
+  const {
+    page,
+    setPage,
+    formValue,
+    visiblePageNumber,
+    setVisiblePageNumber,
+    setPageLength,
+    pageLength,
+  } = useContext(FormContext)
+
+  const navigateNext = () => {
+    if (visiblePageNumber < pageLength) {
+      setVisiblePageNumber(visiblePageNumber + 1)
+    }
+  }
+
+  const navigatePrev = () => {
+    if (visiblePageNumber > 0) {
+      setVisiblePageNumber(visiblePageNumber - 1)
+    }
+  }
+
+  useEffect(() => {
+    const arrayWithoutChildren = questions.filter(
+      (question) => question.parent === undefined
+    )
+
+    setPageLength(arrayWithoutChildren.length)
+  }, [questions, setPageLength])
 
   return (
     <div className={`wrapper`}>
-      {questions.map((items, index) => {
-        return <Formpage items={items} pageno={index} activePage={page} />
+      {questions.map((question, index) => {
+        return <Formpage question={question} navigateNext={navigateNext} />
       })}
       <div className="navigation">
         <ButtonGroup
@@ -22,22 +50,26 @@ export const Form = () => {
           aria-label="outlined primary button group"
         >
           <Button
-            onClick={() => setPage(Math.max(page - 1, 0))}
-            disabled={page === 0}
-            sx={{backgroundColor:"#0445af"}}
+            onClick={() => {
+              navigatePrev()
+            }}
+            disabled={visiblePageNumber === 1}
+            sx={{ backgroundColor: "#0445af" }}
           >
             <ExpandLessIcon />
           </Button>
           <Button
-            onClick={() => setPage(Math.min(page + 1, questions.length - 1))}
-            disabled={page === questions.length - 1}
-            sx={{backgroundColor:"#0445af"}}
+            onClick={() => {
+              navigateNext()
+            }}
+            disabled={visiblePageNumber === pageLength}
+            sx={{ backgroundColor: "#0445af" }}
           >
             <ExpandMoreIcon />
           </Button>
         </ButtonGroup>
 
-        <Button variant="contained"  sx={{backgroundColor:"#0445af "}}>
+        <Button variant="contained" sx={{ backgroundColor: "#0445af " }}>
           Powered by Ramailo.tech
         </Button>
       </div>
