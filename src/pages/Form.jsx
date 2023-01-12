@@ -28,7 +28,7 @@ export const Form = () => {
   return (
     <div className={`wrapper`}>
       {questions.map((question, index) => {
-        return <Formpage question={question} navigateNext={navigateNext} />;
+        return <Formpage question={question} navigateNext={navigateNext} index={index}/>;
       })}
       <div className="navigation">
         <ButtonGroup

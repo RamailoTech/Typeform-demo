@@ -13,7 +13,7 @@ import QuestionContext from "../context/questions/QuestionContext";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export const Formpage = ({ question, navigateNext }) => {
+export const Formpage = ({ question, navigateNext,index }) => {
   const {
     visiblePageNumber,
     setVisiblePageNumber,
@@ -44,7 +44,7 @@ export const Formpage = ({ question, navigateNext }) => {
         </Box>
         <div
           style={{
-            transform: `translateY(-${(visiblePageNumber - 1) * 101}%)`,
+            transform: `translateY(-${(visiblePageNumber - 1) * 100}%)`,
           }}
           className="transition-ease-in-out"
         >
@@ -61,6 +61,7 @@ export const Formpage = ({ question, navigateNext }) => {
                 ) : question.answer.type === "radio" ? (
                   <RadioInput
                     question={item.question}
+                    index={index}
                     options={item.answer.options}
                   />
                 ) : question.answer.type === "dropdown" ? (

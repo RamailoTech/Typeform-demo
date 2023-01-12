@@ -2,6 +2,7 @@ import React, { useContext,useEffect,useRef } from "react";
 import "../input.css";
 import FormContext from "../../../context/form/FormContext";
 import {navigateNext} from "../../../utils/navigate";
+import {useOnKeyPress} from "../../../hooks/useOnKeyPress"
 
 export const TextInput = ({ question }) => {
   const { formValue, setFormValue,visiblePageNumber,pageLength,setVisiblePageNumber,setProgress} = useContext(FormContext);
@@ -18,11 +19,6 @@ export const TextInput = ({ question }) => {
   }
   useEffect(()=>{
     inputref.current.focus();
-    return(()=>{
-      inputref.current.blur();
-    }
-
-    )
   },[])
   return (
     <input

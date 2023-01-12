@@ -1,15 +1,21 @@
-import { useEffect } from "react";
-export const useOnKeyPress = (callback, targetKey) => {
+import { useEffect,useContext } from "react";
+import FormContext from "../context/form/FormContext";
+export const useOnKeyPress = (callback, targetKey,question,options) => {
+  const { setFormValue, formValue } = useContext(FormContext);
+        
   useEffect(() => {
     const keyPressHandler = (event) => {
-      if (event.key === targetKey) {
+      
+      if ((event.key) === targetKey) {
         callback();
+        console.log(event)
+        setFormValue({ ...formValue, [question]:options });
       }
     };
-    window.addEventListener("keydowm", keyPressHandler);
+    window.addEventListener("keydown", keyPressHandler);
 
     return () => {
-      window.removeEventListener("keydowm", keyPressHandler);
+      window.removeEventListener("keydown", keyPressHandler);
     };
   }, [callback, targetKey]);
 };
