@@ -1,17 +1,17 @@
-import React, { useContext } from "react"
-import { Grid, Box, Button } from "@mui/material"
-import flower from "../assets/images/flower.jpg"
-import CheckIcon from "@mui/icons-material/Check"
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import { TextInput } from "../components/input/textInput/inputs"
-import { RadioInput } from "../components/input/radioInput/RadioInput"
-import MultipleChoice from "../components/input/multipleChoice/MultipleChoice"
-import Autocomplete from "../components/input/autoComplete/autoCompleteInput"
-import { DateInput } from "../components/input/dateInput"
-import FormContext from "../context/form/FormContext"
-import QuestionContext from "../context/questions/QuestionContext"
-import { Link, Navigate } from "react-router-dom"
-import { NavigateNext } from "@mui/icons-material"
+import React, { useContext } from "react";
+import { Grid, Box, Button } from "@mui/material";
+import flower from "../assets/images/flower.jpg";
+import CheckIcon from "@mui/icons-material/Check";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { TextInput } from "../components/input/textInput/inputs";
+import { RadioInput } from "../components/input/radioInput/RadioInput";
+import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
+import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
+import { DateInput } from "../components/input/dateInput";
+import FormContext from "../context/form/FormContext";
+import QuestionContext from "../context/questions/QuestionContext";
+import { Link, Navigate } from "react-router-dom";
+import { NavigateNext } from "@mui/icons-material";
 
 export const Formpage = ({ question, navigateNext }) => {
   const {
@@ -20,11 +20,11 @@ export const Formpage = ({ question, navigateNext }) => {
     setPageLength,
     pageLength,
     formValue,
-  } = useContext(FormContext)
-  let questions = useContext(QuestionContext)
-
+  } = useContext(FormContext);
+  let questions = useContext(QuestionContext);
 
   const renderForm = (item) => {
+    // console.log("render form item", item);
     return (
       <div
         style={{ transform: `translateY(-${(visiblePageNumber - 1) * 100}%)` }}
@@ -72,7 +72,7 @@ export const Formpage = ({ question, navigateNext }) => {
                     className="grid-button"
                     endIcon={<CheckIcon />}
                     onClick={() => {
-                      navigateNext()
+                      navigateNext();
                     }}
                   >
                     OK
@@ -86,21 +86,25 @@ export const Formpage = ({ question, navigateNext }) => {
           </Grid>
         </Grid>
       </div>
-    )
-  }
+    );
+  };
 
   const renderChild = () => {
-    const selectedOption = formValue[question.question]
+    const selectedOption = formValue[question.question];
     if (selectedOption !== undefined) {
-      setPageLength(questions.length+1)
-      return renderForm(question.answer.children[selectedOption])
+      let children = question.answer.children[selectedOption];
+      setPageLength(questions.length + children.length);
+
+      return children.map((child, i) => {
+        return renderForm(child);
+      });
     }
-  }
+  };
 
   return (
     <>
       {renderForm(question)}
       {question.answer.children !== undefined ? renderChild() : <></>}
     </>
-  )
-}
+  );
+};

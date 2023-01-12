@@ -1,5 +1,5 @@
-import React from "react"
-import QuestionContext from "./QuestionContext"
+import React from "react";
+import QuestionContext from "./QuestionContext";
 
 const QuestionState = (props) => {
   const questions = [
@@ -25,24 +25,41 @@ const QuestionState = (props) => {
         type: "radio",
         options: ["Cricket", "Football"],
         children: {
-          Cricket: {
-            id: 6,
-            question: "Your favourite Crickter?",
-            answer: {
-              type: "text",
+          Cricket: [
+            {
+              id: 6,
+              question: "Your favourite Crickter?",
+              answer: {
+                type: "text",
+              },
             },
-          },
-          Football: {
-            id: 7,
-            question: "Your favourite Footballer?",
-            answer: {
-              type: "text",
+            {
+              id: 9,
+              question: "Your least favourite Crickter?",
+              answer: {
+                type: "text",
+              },
             },
-          },
+          ],
+          Football: [
+            {
+              id: 7,
+              question: "Your favourite Footballer?",
+              answer: {
+                type: "text",
+              },
+            },
+            {
+              id: 8,
+              question: "Your least favourite Footballer?",
+              answer: {
+                type: "text",
+              },
+            },
+          ],
         },
       },
     },
-    
 
     {
       id: 3,
@@ -72,13 +89,13 @@ const QuestionState = (props) => {
         type: "dateInput",
       },
     },
-  ]
+  ];
 
   return (
     <QuestionContext.Provider value={questions}>
       {props.children}
     </QuestionContext.Provider>
-  )
-}
+  );
+};
 
-export default QuestionState
+export default QuestionState;
