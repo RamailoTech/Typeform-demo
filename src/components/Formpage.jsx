@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState,useContext } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -10,24 +10,38 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NavigateNext } from "@mui/icons-material";
+import LinearProgress from '@mui/material/LinearProgress';
 
 export const Formpage = ({ question, navigateNext }) => {
+
   const {
     visiblePageNumber,
     setVisiblePageNumber,
     setPageLength,
     pageLength,
     formValue,
+    progress, 
+    setProgress
   } = useContext(FormContext);
   let questions = useContext(QuestionContext);
 
+  const handleChange=()=>{
+    navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
+    var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
+    setProgress(progressbar)
+  }
   const renderForm = (item) => {
     // console.log("render form item", item);
+    
     return (
+      <>
+      <Box sx={{ width: '100%' }}>
+      <LinearProgress variant="determinate" value={progress} sx={{height:"8px"}} />
+    </Box>
       <div
-        style={{ transform: `translateY(-${(visiblePageNumber - 1) * 100}%)` }}
+        style={{ transform: `translateY(-${(visiblePageNumber - 1) * 101}%)` }}
         className="transition-ease-in-out"
       >
         <Grid container spacing={0}>
@@ -71,9 +85,7 @@ export const Formpage = ({ question, navigateNext }) => {
                     variant="contained"
                     className="grid-button"
                     endIcon={<CheckIcon />}
-                    onClick={() => {
-                      navigateNext();
-                    }}
+                    onClick= {handleChange}
                   >
                     OK
                   </Button>
@@ -86,6 +98,7 @@ export const Formpage = ({ question, navigateNext }) => {
           </Grid>
         </Grid>
       </div>
+      </>
     );
   };
 

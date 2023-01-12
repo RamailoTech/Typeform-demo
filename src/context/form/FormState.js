@@ -7,7 +7,7 @@ const FormState = (props) => {
   const [visiblePageNumber, setVisiblePageNumber] = useState(1);
   //conditionally rendered question changes page length
   const [pageLength, setPageLength] = useState(0);
-
+  const [progress, setProgress] =useState(0);
   const [formValue, setFormValue] = useState({});
   return (
     <FormContext.Provider
@@ -20,6 +20,8 @@ const FormState = (props) => {
         setPageLength,
         visiblePageNumber,
         setVisiblePageNumber,
+        progress, 
+        setProgress
       }}
     >
       {props.children}

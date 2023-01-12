@@ -34,7 +34,9 @@
   margin-bottom: 5px;
   position: relative;
 }
-
+.radio_input_button:focus{
+border:2px solid #0445af;
+}
 .radio_input_button_option {
   border: 1px solid #0445af;
 

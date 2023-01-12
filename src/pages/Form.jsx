@@ -6,30 +6,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import ExpandLessIcon from "@mui/icons-material/ExpandLess"
 import FormContext from "../context/form/FormContext"
 import "../assets/styles/form.css"
-
+import {navigatePrev,navigateNext} from "../utils/navigate"
 export const Form = () => {
   let questions = useContext(QuestionContext)
   const {
-    page,
-    setPage,
-    formValue,
+    progress,
+     setProgress,
     visiblePageNumber,
     setVisiblePageNumber,
     setPageLength,
     pageLength,
   } = useContext(FormContext)
-
-  const navigateNext = () => {
-    if (visiblePageNumber < pageLength) {
-      setVisiblePageNumber(visiblePageNumber + 1)
-    }
-  }
-
-  const navigatePrev = () => {
-    if (visiblePageNumber > 0) {
-      setVisiblePageNumber(visiblePageNumber - 1)
-    }
-  }
 
   useEffect(() => {
     const arrayWithoutChildren = questions.filter(
@@ -51,7 +38,9 @@ export const Form = () => {
         >
           <Button
             onClick={() => {
-              navigatePrev()
+              navigatePrev(visiblePageNumber,setVisiblePageNumber)
+             
+             
             }}
             disabled={visiblePageNumber === 1}
             sx={{ backgroundColor: "#0445af" }}
@@ -60,7 +49,9 @@ export const Form = () => {
           </Button>
           <Button
             onClick={() => {
-              navigateNext()
+              navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
+              var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
+              setProgress(progressbar)
             }}
             disabled={visiblePageNumber === pageLength}
             sx={{ backgroundColor: "#0445af" }}
