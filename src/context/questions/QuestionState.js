@@ -33,22 +33,22 @@ const QuestionState = (props) => {
               },
             },
           ],
-          Female: [
-            {
-              id: 7,
-              question: "whats on your mind?",
-              answer: {
-                type: "text",
-              },
-            },
-            {
-              id: 8,
-              question: "Your favourite play?",
-              answer: {
-                type: "text",
-              },
-            },
-          ],
+          // Female: [
+          //   {
+          //     id: 7,
+          //     question: "whats on your mind?",
+          //     answer: {
+          //       type: "text",
+          //     },
+          //   },
+          //   {
+          //     id: 8,
+          //     question: "Your favourite play?",
+          //     answer: {
+          //       type: "text",
+          //     },
+          //   },
+          // ],
         },
       },
     },
