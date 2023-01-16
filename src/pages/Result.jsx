@@ -13,7 +13,7 @@ import { Button } from "@mui/material";
 
 const Result = () => {
   const { formValue, setFormValue } = useContext(FormContext);
-  const { page, setPage } = useContext(FormContext);
+  const { setVisiblePageNumber } = useContext(FormContext);
 
   return (
     <Container sx={{ marginTop: "6rem" }}>
@@ -40,7 +40,7 @@ const Result = () => {
           sx={{ marginTop: "10px" }}
           onClick={() => {
             setFormValue({});
-            setPage(0);
+            setVisiblePageNumber(1);
           }}
         >
           Cancel

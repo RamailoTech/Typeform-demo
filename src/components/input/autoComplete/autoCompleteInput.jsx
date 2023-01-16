@@ -5,7 +5,8 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useComponentVisible from "../../../hooks/hook";
 import FormContext from "../../../context/form/FormContext";
 const AutoCompleteInput = ({ options, question }) => {
-  const { formValue, setFormValue,page,setPage } = useContext(FormContext);
+  const { formValue, setFormValue, visiblePageNumber, setVisiblePageNumber } =
+    useContext(FormContext);
 
   const inputRef = useRef();
   const [value, setValue] = useState("");
@@ -18,14 +19,11 @@ const AutoCompleteInput = ({ options, question }) => {
     setValue(() => curr);
   };
   useEffect(() => {
-    if(options.includes(value)){
-
+    if (options.includes(value)) {
       setFormValue({ ...formValue, [question]: value });
-    setPage(page + 1)
-
+      setVisiblePageNumber(visiblePageNumber + 1);
     }
-
-  }, [value, question,]);
+  }, [value, question]);
 
   return (
     <>

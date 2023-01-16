@@ -17,7 +17,8 @@ export const Form = () => {
     setPageLength,
     pageLength,
     progress,
-    setProgress
+    setProgress,
+    setGlobalIndex,
   } = useContext(FormContext);
 
   const navigateNext = () => {
@@ -51,7 +52,14 @@ export const Form = () => {
       </Box>
       <div className={`wrapper`}>
         {questions.map((question, index) => {
-          return <Formpage key={index} question={question} navigateNext={navigateNext} />;
+          return (
+            <Formpage
+              key={index}
+              index={index}
+              question={question}
+              navigateNext={navigateNext}
+            />
+          );
         })}
         <div className="navigation">
           <ButtonGroup
@@ -70,8 +78,10 @@ export const Form = () => {
             <Button
               onClick={() => {
                 navigateNext();
-                var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
-                    setProgress(progressbar);
+                var progressbar = Math.floor(
+                  (visiblePageNumber / pageLength) * 100
+                );
+                setProgress(progressbar);
               }}
               disabled={visiblePageNumber === pageLength}
               sx={{ backgroundColor: "#0445af" }}

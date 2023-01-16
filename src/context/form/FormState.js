@@ -2,9 +2,9 @@ import FormContext from "./FormContext";
 import React, { useState } from "react";
 
 const FormState = (props) => {
-  const [page, setPage] = useState(0);
   //to show question numbers
   const [visiblePageNumber, setVisiblePageNumber] = useState(1);
+  const [globalIndex, setGlobalIndex] = useState();
   //conditionally rendered question changes page length
   const [pageLength, setPageLength] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -12,15 +12,16 @@ const FormState = (props) => {
   return (
     <FormContext.Provider
       value={{
-        page,
-        setPage,
+        globalIndex,
+        setGlobalIndex,
         formValue,
         setFormValue,
         pageLength,
         setPageLength,
         visiblePageNumber,
         setVisiblePageNumber,
-        progress, setProgress
+        progress,
+        setProgress,
       }}
     >
       {props.children}
