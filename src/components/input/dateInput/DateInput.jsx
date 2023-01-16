@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./dateInput.css";
-import FormContext from "../../../context/form/FormContext";
+import FormContext from '../../../context/form/FormContext';
+import Alert from '@mui/material/Alert';
 
-export const DateInput = ({ question }) => {
-  const { formValue, setFormValue } = useContext(FormContext);
+export const DateInput = ({question}) => {
+  const {formValue,setFormValue} = useContext(FormContext)
+  const [errorMessage, setErrorMessage] = useState(null)
   const [date, setDate] = useState({
     day: "",
     month: "",
@@ -12,9 +14,14 @@ export const DateInput = ({ question }) => {
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+    
+   
     if (name === "month") {
+
+      setErrorMessage(null)
       if (parseInt(value) > 12) {
-        setDate({ ...date, [name]: 12 });
+        setErrorMessage("That date isn't valid. Check the month and day aren't reversed.")
+        //  setDate({ ...date, [name]: 12 });
       } else if (parseInt(value) === 0) {
         setDate({ ...date, [name]: 1 });
       } else {
@@ -22,8 +29,10 @@ export const DateInput = ({ question }) => {
       }
     }
     if (name === "day") {
+      setErrorMessage(null)
       if (parseInt(value) > 31) {
-        setDate({ ...date, [name]: 31 });
+        setErrorMessage("That date isn't valid. Check the month and day aren't reversed.")
+        // setDate({ ...date, [name]: 31 });
       } else if (parseInt(value) === 0) {
         setDate({ ...date, [name]: 1 });
       } else {
@@ -31,9 +40,15 @@ export const DateInput = ({ question }) => {
       }
     }
     if (name === "year") {
+      setErrorMessage(null)
       if (value.length > 4) {
+        
         setDate({ ...date, [name]: new Date().getFullYear() });
-      } else {
+      }
+      else if (value.length < 4) {
+        setErrorMessage("Enter all 4 digits for a year")
+        setDate({ ...date, [name]: value });
+      }  else {
         setDate({ ...date, [name]: value });
       }
     }
@@ -75,6 +90,9 @@ export const DateInput = ({ question }) => {
         value={date.year}
         onChange={handleChange}
       />
+        {!errorMessage?null:<Alert severity="error">{errorMessage}</Alert>
+        }
+        
     </div>
   );
 };

@@ -10,7 +10,9 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import QuestionContext from "../context/questions/QuestionContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { NavigateNext } from "@mui/icons-material";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export const Formpage = ({ question, navigateNext, index }) => {
   const {
@@ -19,6 +21,7 @@ export const Formpage = ({ question, navigateNext, index }) => {
     setPageLength,
     pageLength,
     formValue,
+    progress,
     setProgress,
   } = useContext(FormContext);
   let questions = useContext(QuestionContext);
