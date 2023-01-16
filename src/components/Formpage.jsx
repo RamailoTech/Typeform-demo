@@ -49,10 +49,10 @@ export const Formpage = ({ question, navigateNext, index }) => {
                   <span className="question-number">{visiblePageNumber}</span>
                   <ArrowForwardIcon
                     color="primary"
-                    sx={{ fontSize: { lg: "30px" } }}
+                    sx={{ fontSize: { md:"20px"} }}
                   />
                   {item.question}
-                </p>
+                </p>  
                 {item.answer.type === "text" ? (
                   <TextInput question={item.question} />
                 ) : question.answer.type === "radio" ? (

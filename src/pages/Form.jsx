@@ -17,6 +17,7 @@ export const Form = () => {
     setPageLength,
     pageLength,
     progress,
+    setProgress
   } = useContext(FormContext);
 
   const navigateNext = () => {
@@ -69,6 +70,8 @@ export const Form = () => {
             <Button
               onClick={() => {
                 navigateNext();
+                var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
+                    setProgress(progressbar);
               }}
               disabled={visiblePageNumber === pageLength}
               sx={{ backgroundColor: "#0445af" }}
