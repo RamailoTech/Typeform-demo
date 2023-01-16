@@ -114,16 +114,18 @@ export const Formpage = ({ question, navigateNext, index }) => {
   const RenderChild = () => {
     const selectedOption = formValue[question.question];
     let children = question.answer.children[selectedOption];
-
     useEffect(() => {
-      if (selectedOption !== undefined) {
+      if (selectedOption !== undefined && children !== undefined) {
         setPageLength(pageLength + children.length);
       }
     }, [selectedOption]);
-    if (selectedOption !== undefined) {
+
+    if (selectedOption !== undefined && children !== undefined) {
       return children.map((child) => {
         return renderForm(child);
       });
+    } else {
+      return null;
     }
   };
 
