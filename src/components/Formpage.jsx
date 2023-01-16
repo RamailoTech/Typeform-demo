@@ -9,10 +9,7 @@ import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
-import QuestionContext from "../context/questions/QuestionContext";
-import { Link, Navigate } from "react-router-dom";
-import { NavigateNext } from "@mui/icons-material";
-import LinearProgress from "@mui/material/LinearProgress";
+import { Link } from "react-router-dom";
 
 export const Formpage = ({ question, navigateNext, index }) => {
   const {
@@ -22,6 +19,7 @@ export const Formpage = ({ question, navigateNext, index }) => {
     pageLength,
     formValue,
     setProgress,
+    setGlobalIndex,
   } = useContext(FormContext);
   // let questions = useContext(QuestionContext);
   const inputref = useRef(null);
@@ -38,6 +36,9 @@ export const Formpage = ({ question, navigateNext, index }) => {
     }
   }, [inputref]);
 
+  useEffect(() => {
+    setGlobalIndex(visiblePageNumber);
+  });
   const renderForm = (item) => {
     return (
       <>
