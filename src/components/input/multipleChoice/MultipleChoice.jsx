@@ -37,6 +37,7 @@ const MultipleChoice = ({ options, question }) => {
             onClick={(e) => {
               handleClick(e, index);
             }}
+            key={index}
           >
             <div className="radio_input_content_wrapper">
               <span className="radio_input_button_option">

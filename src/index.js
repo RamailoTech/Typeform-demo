@@ -6,11 +6,9 @@ import FormState from "./context/form/FormState";
 import QuestionState from "./context/questions/QuestionState";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <FormState>
-      <QuestionState>
-        <App />
-      </QuestionState>
-    </FormState>
-  </React.StrictMode>
+  <FormState>
+    <QuestionState>
+      <App />
+    </QuestionState>
+  </FormState>
 );
