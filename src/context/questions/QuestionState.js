@@ -20,14 +20,14 @@ const QuestionState = (props) => {
           Male: [
             {
               id: 6,
-              question: "Your favourite Crickter?",
+              question: "What's you thinking?",
               answer: {
                 type: "text",
               },
             },
             {
               id: 9,
-              question: "Your least favourite Crickter?",
+              question: "Your  favourite web-series?",
               answer: {
                 type: "text",
               },
@@ -36,14 +36,14 @@ const QuestionState = (props) => {
           Female: [
             {
               id: 7,
-              question: "Your favourite Footballer?",
+              question: "whats on your mind?",
               answer: {
                 type: "text",
               },
             },
             {
               id: 8,
-              question: "Your least favourite Footballer?",
+              question: "Your favourite play?",
               answer: {
                 type: "text",
               },

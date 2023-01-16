@@ -46,7 +46,7 @@ export const Formpage = ({ question, navigateNext, index }) => {
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">
                 <p className="grid-question">
-                  <span>{visiblePageNumber}</span>
+                  <span className="question-number">{visiblePageNumber}</span>
                   <ArrowForwardIcon
                     color="primary"
                     sx={{ fontSize: { lg: "30px" } }}
@@ -88,7 +88,10 @@ export const Formpage = ({ question, navigateNext, index }) => {
                       className="grid-button"
                       endIcon={
                         <CheckIcon
-                          sx={{ marginLeft: { md: "-8px", lg: "-2px" } }}
+                          sx={{
+                            fontSize: "40",
+                            marginLeft: { md: "-8px", lg: "-2px" },
+                          }}
                         />
                       }
                       onClick={handleChange}

@@ -12,9 +12,6 @@ import { Box } from "@mui/material";
 export const Form = () => {
   let questions = useContext(QuestionContext);
   const {
-    page,
-    setPage,
-    formValue,
     visiblePageNumber,
     setVisiblePageNumber,
     setPageLength,
