@@ -1,17 +1,53 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
-import { OptionList } from "../../../utils/option";
+import { OptionList,AlphabetArray} from "../../../utils/option";
+import { navigateNext } from "../../../utils/navigate";
 
-export const RadioInput = ({ options, question }) => {
+export const RadioInput = ({ options, question,index }) => {
   const [active, setActive] = useState(null);
 
-  const { setFormValue, formValue, page, setPage } = useContext(FormContext);
-  const handleClick = (e, i) => {
+  const {  formValue, setFormValue,visiblePageNumber,pageLength,setVisiblePageNumber,setProgress} = useContext(FormContext);
+  const handleClick = (e,i,op) => {
+    console.log("hii")
     setActive(i);
-    setFormValue({ ...formValue, [question]: e.target.innerText });
+    console.log(i,op)
+    setFormValue();
+    console.log(formValue)
   };
+  useEffect(()=>{
+    const handlelistner=(event)=>{
+      var clickedIndex=AlphabetArray.indexOf(event.key)
+     
+      console.log(clickedIndex)
+      if(clickedIndex < options.length){
+        console.log("option",options.length)
+        handleClick(event,clickedIndex,options[clickedIndex])
+      }
+      if(event.key==='Enter'){
+        setFormValue({ ...formValue, [question]: options[clickedIndex] });
+        navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
+        var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
+        setProgress(progressbar)
+       }
+
+    }
+    
+    
+
+    window.addEventListener("keydown",handlelistner)
+      
+  
+    // else{
+    //   window.removeEventListener("keydown",handlelistner)
+    // }
+    return()=>{
+      window.removeEventListener("keydown",handlelistner)
+    }
+    }
+   ,[])
+
 
   return (
     <>
@@ -28,7 +64,7 @@ export const RadioInput = ({ options, question }) => {
               </span>
               <p
                 onClick={(e) => {
-                  handleClick(e, i);
+                  handleClick(e, i,op);
                 }}
               >
                 {op}

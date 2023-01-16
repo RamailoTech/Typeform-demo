@@ -5,9 +5,9 @@ import QuestionContext from "../../../context/questions/QuestionContext";
 import {navigateNext} from "../../../utils/navigate";
 
 
-export const TextInput = ({ question }) => {
+export const TextInput = ({ question,inputref}) => {
   const { formValue, setFormValue,visiblePageNumber,pageLength,setVisiblePageNumber,setProgress} = useContext(FormContext);
-  const inputref=useRef();
+  
   const handleChange = (e) => {
     setFormValue({ ...formValue, [question]: e.target.value });
   };
@@ -18,13 +18,7 @@ export const TextInput = ({ question }) => {
     setProgress(progressbar)
    }
   }
-  
-  useEffect(()=>{
-    if(visiblePageNumber===1){
-    inputref.current.focus();
-    }
-    
-  },[])
+
   
 
   return (

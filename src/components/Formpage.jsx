@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect,useRef } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -25,12 +25,19 @@ export const Formpage = ({ question, navigateNext, index }) => {
     setProgress,
   } = useContext(FormContext);
   let questions = useContext(QuestionContext);
-
+ const inputref=useRef(null);
+  
   const handleChange = () => {
     navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber);
     var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
     setProgress(progressbar);
   };
+    
+  useEffect(()=>{
+    if (inputref.current) {
+      inputref.current.focus();
+    }  
+  },[inputref])
   const renderForm = (item) => {
     // console.log("render form item", item);
 
@@ -54,7 +61,7 @@ export const Formpage = ({ question, navigateNext, index }) => {
                   {item.question}
                 </p>  
                 {item.answer.type === "text" ? (
-                  <TextInput question={item.question} />
+                  <TextInput question={item.question} inputref={inputref} />
                 ) : question.answer.type === "radio" ? (
                   <RadioInput
                     question={item.question}

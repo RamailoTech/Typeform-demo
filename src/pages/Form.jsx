@@ -51,7 +51,7 @@ export const Form = () => {
       </Box>
       <div className={`wrapper`}>
         {questions.map((question, index) => {
-          return <Formpage question={question} navigateNext={navigateNext} />;
+          return <Formpage key={index} question={question} navigateNext={navigateNext} />;
         })}
         <div className="navigation">
           <ButtonGroup
