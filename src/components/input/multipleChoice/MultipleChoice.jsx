@@ -11,20 +11,39 @@ const MultipleChoice = ({ options, question }) => {
 
   const handleClick = (e, i) => {
     if (active.includes(i)) {
-      return setActive(active.filter((curr) => curr !== i));
+      setActive(active.filter((curr) => curr !== i));
+
+      setFormValue({
+        ...formValue,
+        [question]: formValue[question].filter((val) => val !== options[i]),
+      });
+      return;
     }
     setActive([...active, i]);
+
+    setFormValue({
+      ...formValue,
+      [question]: [...(formValue[question] || []), options[i]],
+    });
   };
 
-  let selectedAnswer = active.map((i) => {
-    return options[i];
-  });
-
   useEffect(() => {
-    if (selectedAnswer.length > 0) {
-      setFormValue({ ...formValue, [question]: selectedAnswer });
+    if (formValue[question] !== undefined) {
+      let newActive = [];
+      options.forEach((option, index) => {
+        if (formValue[question].indexOf(option) !== -1) {
+          newActive.push(index);
+        }
+      });
+
+      setActive(newActive);
+    } else {
+      setActive([]);
     }
-  }, [active, question]);
+    // if (selectedAnswer.length > 0) {
+    //   setFormValue({ ...formValue, [question]: selectedAnswer });
+    // }
+  }, []);
 
   return (
     <>

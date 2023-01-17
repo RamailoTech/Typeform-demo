@@ -41,6 +41,8 @@ export const Form = () => {
     setPageLength(arrayWithoutChildren.length);
   }, [questions, setPageLength]);
 
+  const activeQuestion = questions[visiblePageNumber - 1];
+
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -51,16 +53,8 @@ export const Form = () => {
         />
       </Box>
       <div className={`wrapper`}>
-        {questions.map((question, index) => {
-          return (
-            <Formpage
-              key={index}
-              index={index}
-              question={question}
-              navigateNext={navigateNext}
-            />
-          );
-        })}
+        <Formpage question={activeQuestion} navigateNext={navigateNext} />
+
         <div className="navigation">
           <ButtonGroup
             variant="contained"

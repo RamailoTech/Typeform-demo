@@ -11,7 +11,7 @@ import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import { Link } from "react-router-dom";
 
-export const Formpage = ({ question, navigateNext, index }) => {
+export const Formpage = ({ question, navigateNext }) => {
   const {
     visiblePageNumber,
     setVisiblePageNumber,
@@ -19,7 +19,7 @@ export const Formpage = ({ question, navigateNext, index }) => {
     pageLength,
     formValue,
     setProgress,
-    setGlobalIndex,
+    questions,
   } = useContext(FormContext);
   // let questions = useContext(QuestionContext);
   const inputref = useRef(null);
@@ -34,20 +34,13 @@ export const Formpage = ({ question, navigateNext, index }) => {
     if (inputref.current) {
       inputref.current.focus();
     }
-  }, [inputref]);
+  }, [inputref, question]);
+  console.log(question);
 
-  useEffect(() => {
-    setGlobalIndex(visiblePageNumber);
-  });
-  const renderForm = (item) => {
+  const RenderForm = (item) => {
     return (
       <>
-        <div
-          style={{
-            transform: `translateY(-${(visiblePageNumber - 1) * 100}%)`,
-          }}
-          className="transition-ease-in-out"
-        >
+        <div className="transition-ease-in-out">
           <Grid container spacing={0}>
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">
@@ -64,7 +57,6 @@ export const Formpage = ({ question, navigateNext, index }) => {
                 ) : question.answer.type === "radio" ? (
                   <RadioInput
                     question={item.question}
-                    index={index}
                     options={item.answer.options}
                   />
                 ) : question.answer.type === "dropdown" ? (
@@ -118,26 +110,26 @@ export const Formpage = ({ question, navigateNext, index }) => {
   };
 
   const RenderChild = () => {
-    const selectedOption = formValue[question.question];
-    let children = question.answer.children[selectedOption];
-    useEffect(() => {
-      if (selectedOption !== undefined && children !== undefined) {
-        setPageLength(pageLength + children.length);
-      }
-    }, [selectedOption]);
-
-    if (selectedOption !== undefined && children !== undefined) {
-      return children.map((child) => {
-        return renderForm(child);
-      });
-    } else {
-      return null;
-    }
+    // const selectedOption = formValue[question.question];
+    // let children = question.answer.children[selectedOption];
+    // useEffect(() => {
+    //   if (selectedOption !== undefined && children !== undefined) {
+    //     setPageLength(pageLength + children.length);
+    //   }
+    // }, []);
+    // if (selectedOption !== undefined && children !== undefined) {
+    //   setPageLength(questions.length + children.length);
+    //   return children.map((child) => {
+    //     return RenderForm(child);
+    //   });
+    // } else {
+    //   return null;
+    // }
   };
 
   return (
     <>
-      {renderForm(question)}
+      {RenderForm(question)}
       {question.answer.children !== undefined ? RenderChild() : ""}
     </>
   );
