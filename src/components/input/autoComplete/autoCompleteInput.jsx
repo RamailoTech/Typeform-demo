@@ -21,7 +21,7 @@ const AutoCompleteInput = ({ options, question }) => {
   useEffect(() => {
     if (options.includes(value)) {
       setFormValue({ ...formValue, [question]: value });
-      setVisiblePageNumber(visiblePageNumber + 1);
+     
     }
   }, [value, question]);
 
