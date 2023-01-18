@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
-import { OptionList } from "../../../utils/option";
+import { AlphabetArray, OptionList } from "../../../utils/option";
 import FormContext from "../../../context/form/FormContext";
 
 const MultipleChoice = ({ options, question }) => {
@@ -10,9 +10,10 @@ const MultipleChoice = ({ options, question }) => {
   const { formValue, setFormValue } = useContext(FormContext);
 
   const handleClick = (e, i) => {
+    console.log(i)
     if (active.includes(i)) {
       setActive(active.filter((curr) => curr !== i));
-
+     console.log('active',active);
       setFormValue({
         ...formValue,
         [question]: formValue[question].filter((val) => val !== options[i]),
@@ -40,9 +41,17 @@ const MultipleChoice = ({ options, question }) => {
     } else {
       setActive([]);
     }
-    // if (selectedAnswer.length > 0) {
-    //   setFormValue({ ...formValue, [question]: selectedAnswer });
-    // }
+    const handlelistner=(event)=>{
+      var clickedIndex=AlphabetArray.indexOf(event.key)
+      console.log(clickedIndex)
+      if(clickedIndex< options.length){
+        handleClick(event,clickedIndex,options[clickedIndex])
+      }
+    }
+    window.addEventListener("keydown",handlelistner)
+    return()=>{
+      window.removeEventListener("keydown",handlelistner)
+    }
   }, []);
 
   return (

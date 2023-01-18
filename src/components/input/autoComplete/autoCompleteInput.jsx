@@ -4,18 +4,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useComponentVisible from "../../../hooks/hook";
 import FormContext from "../../../context/form/FormContext";
-const AutoCompleteInput = ({ options, question }) => {
+const AutoCompleteInput = ({ options, question,inputref }) => {
   const { formValue, setFormValue, visiblePageNumber, setVisiblePageNumber } =
     useContext(FormContext);
 
-  const inputRef = useRef();
+ 
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
   const handleChange = () => {
     setIsComponentVisible(true);
-    let curr = inputRef.current.value;
+    let curr = inputref.current.value;
     setValue(() => curr);
   };
   useEffect(() => {
@@ -36,7 +36,7 @@ const AutoCompleteInput = ({ options, question }) => {
         >
           <input
             onChange={handleChange}
-            ref={inputRef}
+            ref={inputref}
             value={formValue[question]}
             type="text"
             className="autocomplete_text_answer_input"

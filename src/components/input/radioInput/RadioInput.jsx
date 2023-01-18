@@ -2,31 +2,52 @@ import React, { useContext, useState, useEffect } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
-import { OptionList } from "../../../utils/option";
+import { AlphabetArray, OptionList } from "../../../utils/option";
+import { navigateNext } from "../../../utils/navigate";
 
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
+  const { setFormValue, formValue } = useContext(FormContext);
+ 
 
-  const {
-    formValue,
-    setFormValue,
-
-    globalIndex,
-  } = useContext(FormContext);
-  console.log("setGlobalIndex", globalIndex);
   const handleClick = (e, i) => {
     setActive(i);
-    console.log(i, question);
     setFormValue({ ...formValue, [question]: options[i] });
   };
 
-  useEffect(() => {
+  useEffect(()=>{
     if (formValue[question] !== undefined) {
       setActive(options.indexOf(formValue[question]));
     } else {
       setActive(null);
     }
-  }, [question]);
+    const handlelistner=(event)=>{
+      var clickedIndex=AlphabetArray.indexOf(event.key)
+      console.log(clickedIndex)
+      if(clickedIndex< options.length){
+        handleClick(event,clickedIndex,options[clickedIndex])
+
+      }
+      // if(event.key==='Enter'){
+      //   navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
+      //   var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
+      //   setProgress(progressbar)
+      //  }
+
+    }
+    
+    
+
+    window.addEventListener("keydown",handlelistner)
+      
+ 
+    
+    return()=>{
+      window.removeEventListener("keydown",handlelistner)
+    }
+    }
+   ,[options])
+
 
   return (
     <>
