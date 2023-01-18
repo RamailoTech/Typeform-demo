@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./dateInput.css";
-import FormContext from '../../../context/form/FormContext';
-import Alert from '@mui/material/Alert';
+import FormContext from "../../../context/form/FormContext";
+import Alert from "@mui/material/Alert";
 
-export const DateInput = ({question}) => {
-  const {formValue,setFormValue} = useContext(FormContext)
-  const [errorMessage, setErrorMessage] = useState(null)
+export const DateInput = ({ question }) => {
+  const { formValue, setFormValue } = useContext(FormContext);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [date, setDate] = useState({
     day: "",
     month: "",
@@ -14,13 +14,13 @@ export const DateInput = ({question}) => {
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    
-   
-    if (name === "month") {
 
-      setErrorMessage(null)
+    if (name === "month") {
+      setErrorMessage(null);
       if (parseInt(value) > 12) {
-        setErrorMessage("That date isn't valid. Check the month and day aren't reversed.")
+        setErrorMessage(
+          "That date isn't valid. Check the month and day aren't reversed."
+        );
         //  setDate({ ...date, [name]: 12 });
       } else if (parseInt(value) === 0) {
         setDate({ ...date, [name]: 1 });
@@ -29,9 +29,11 @@ export const DateInput = ({question}) => {
       }
     }
     if (name === "day") {
-      setErrorMessage(null)
+      setErrorMessage(null);
       if (parseInt(value) > 31) {
-        setErrorMessage("That date isn't valid. Check the month and day aren't reversed.")
+        setErrorMessage(
+          "That date isn't valid. Check the month and day aren't reversed."
+        );
         // setDate({ ...date, [name]: 31 });
       } else if (parseInt(value) === 0) {
         setDate({ ...date, [name]: 1 });
@@ -40,15 +42,13 @@ export const DateInput = ({question}) => {
       }
     }
     if (name === "year") {
-      setErrorMessage(null)
+      setErrorMessage(null);
       if (value.length > 4) {
-        
         setDate({ ...date, [name]: new Date().getFullYear() });
-      }
-      else if (value.length < 4) {
-        setErrorMessage("Enter all 4 digits for a year")
+      } else if (value.length < 4) {
+        setErrorMessage("Enter all 4 digits for a year");
         setDate({ ...date, [name]: value });
-      }  else {
+      } else {
         setDate({ ...date, [name]: value });
       }
     }
@@ -90,9 +90,7 @@ export const DateInput = ({question}) => {
         value={date.year}
         onChange={handleChange}
       />
-        {!errorMessage?null:<Alert severity="error">{errorMessage}</Alert>
-        }
-        
+      {!errorMessage ? null : <Alert severity="error">{errorMessage}</Alert>}
     </div>
   );
 };

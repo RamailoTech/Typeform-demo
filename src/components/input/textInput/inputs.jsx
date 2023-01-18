@@ -16,6 +16,7 @@ export const TextInput = ({ question }) => {
       className="text_answer_input"
       placeholder="Type your answer here..."
       onChange={handleChange}
+      value={formValue[question] ? formValue[question] : ""}
     />
   );
 };

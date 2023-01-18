@@ -40,9 +40,6 @@ const MultipleChoice = ({ options, question }) => {
     } else {
       setActive([]);
     }
-    // if (selectedAnswer.length > 0) {
-    //   setFormValue({ ...formValue, [question]: selectedAnswer });
-    // }
   }, []);
 
   return (
