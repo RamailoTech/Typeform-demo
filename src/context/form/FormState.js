@@ -9,6 +9,7 @@ const FormState = (props) => {
   const [pageLength, setPageLength] = useState(0);
   const [progress, setProgress] = useState(0);
   const [formValue, setFormValue] = useState({});
+  const [direction, setDirection] = useState(0);
   return (
     <FormContext.Provider
       value={{
@@ -22,6 +23,8 @@ const FormState = (props) => {
         setVisiblePageNumber,
         progress,
         setProgress,
+        direction,
+         setDirection
       }}
     >
       {props.children}

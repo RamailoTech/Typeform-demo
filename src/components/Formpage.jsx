@@ -20,12 +20,13 @@ export const Formpage = ({ question, navigateNext }) => {
     formValue,
     setProgress,
     questions,
+    setDirection
   } = useContext(FormContext);
   // let questions = useContext(QuestionContext);
   const inputref = useRef(null);
 
   const handleChange = () => {
-    navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber);
+    navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber,setDirection);
     var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
     setProgress(progressbar);
   };
@@ -40,7 +41,11 @@ export const Formpage = ({ question, navigateNext }) => {
   const RenderForm = (item) => {
     return (
       <>
-        <div className="transition-ease-in-out">
+        <div
+          
+          className="transition-ease-in-out"
+        >
+
           <Grid container spacing={0}>
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">

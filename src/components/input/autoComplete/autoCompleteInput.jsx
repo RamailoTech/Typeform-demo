@@ -37,7 +37,7 @@ const AutoCompleteInput = ({ options, question }) => {
           <input
             onChange={handleChange}
             ref={inputRef}
-            value={value}
+            value={formValue[question]}
             type="text"
             className="autocomplete_text_answer_input"
             placeholder="Type or Select an option..."

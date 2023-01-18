@@ -8,6 +8,8 @@ import FormContext from "../context/form/FormContext";
 import "../assets/styles/form.css";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Box } from "@mui/material";
+import VerticalAnimation from "../animations/VerticalAnimation";
+import { navigateNext, navigatePrev } from "../utils/navigate";
 
 export const Form = () => {
   let questions = useContext(QuestionContext);
@@ -18,20 +20,13 @@ export const Form = () => {
     pageLength,
     progress,
     setProgress,
-    setGlobalIndex,
+    direction,
+    setDirection
+    
   } = useContext(FormContext);
 
-  const navigateNext = () => {
-    if (visiblePageNumber < pageLength) {
-      setVisiblePageNumber(visiblePageNumber + 1);
-    }
-  };
-
-  const navigatePrev = () => {
-    if (visiblePageNumber > 0) {
-      setVisiblePageNumber(visiblePageNumber - 1);
-    }
-  };
+  
+ 
 
   useEffect(() => {
     const arrayWithoutChildren = questions.filter(
@@ -53,7 +48,9 @@ export const Form = () => {
         />
       </Box>
       <div className={`wrapper`}>
+      <VerticalAnimation activeIndex={visiblePageNumber} direction={direction}>
         <Formpage question={activeQuestion} navigateNext={navigateNext} />
+        </VerticalAnimation>
 
         <div className="navigation">
           <ButtonGroup
@@ -62,7 +59,7 @@ export const Form = () => {
           >
             <Button
               onClick={() => {
-                navigatePrev();
+                navigatePrev(visiblePageNumber,setVisiblePageNumber,setDirection);
               }}
               disabled={visiblePageNumber === 1}
               sx={{ backgroundColor: "#0445af" }}
@@ -71,7 +68,7 @@ export const Form = () => {
             </Button>
             <Button
               onClick={() => {
-                navigateNext();
+                navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber,setDirection);
                 var progressbar = Math.floor(
                   (visiblePageNumber / pageLength) * 100
                 );
