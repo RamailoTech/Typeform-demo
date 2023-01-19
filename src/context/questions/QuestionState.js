@@ -16,33 +16,35 @@ const QuestionState = (props) => {
       answer: {
         type: "radio",
         options: ["Male", "Female"],
-        children: {
-          Male: [
-            {
-              id: 6,
-              question: "What's on your mind?",
-              answer: {
-                type: "text",
-              },
-            },
-            {
-              id: 9,
-              question: "Your  favourite web-series?",
-              answer: {
-                type: "text",
-              },
-            },
-          ],
-          Female: [
-            {
-              id: 8,
-              question: "Your favourite play?",
-              answer: {
-                type: "text",
-              },
-            },
-          ],
-        },
+      },
+    },
+    {
+      id: 6,
+      question: "What's on your mind?",
+      parentQuestion: "Select your gender",
+
+      parent: "Male",
+      answer: {
+        type: "text",
+      },
+    },
+    {
+      id: 9,
+      question: "Your  favourite web-series?",
+      parentQuestion: "Select your gender",
+
+      parent: "Male",
+      answer: {
+        type: "text",
+      },
+    },
+    {
+      id: 8,
+      question: "Your favourite play?",
+      parent: "Female",
+      parentQuestion: "Select your gender",
+      answer: {
+        type: "text",
       },
     },
     {

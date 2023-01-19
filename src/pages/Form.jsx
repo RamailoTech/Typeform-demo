@@ -10,24 +10,21 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Box } from "@mui/material";
 import VerticalAnimation from "../animations/VerticalAnimation";
 import { navigateNext, navigatePrev } from "../utils/navigate";
+import { CheckQuestion } from "../utils/helper";
 
 export const Form = () => {
   let questions = useContext(QuestionContext);
   const {
     visiblePageNumber,
     setVisiblePageNumber,
-    setPageLength,
     pageLength,
     progress,
     setProgress,
     direction,
-    setDirection
-    
+    setDirection,
+    setPageLength,
+    formValue,
   } = useContext(FormContext);
-
-  
- 
-
   useEffect(() => {
     const arrayWithoutChildren = questions.filter(
       (question) => question.parent === undefined
@@ -36,56 +33,81 @@ export const Form = () => {
     setPageLength(arrayWithoutChildren.length);
   }, [questions, setPageLength]);
 
-  const activeQuestion = questions[visiblePageNumber - 1];
+  let question = questions[visiblePageNumber - 1];
+
+  let activeQuestion = CheckQuestion(question);
+
+  console.log("activeQuestion", activeQuestion);
 
   return (
     <>
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress
-          variant="determinate"
-          value={progress}
-          sx={{ height: "8px", postion: "fixed", top: "0px", zIndex: "999" }}
-        />
-      </Box>
-      <div className={`wrapper`}>
-      <VerticalAnimation activeIndex={visiblePageNumber} direction={direction}>
-        <Formpage question={activeQuestion} navigateNext={navigateNext} />
-        </VerticalAnimation>
-
-        <div className="navigation">
-          <ButtonGroup
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            <Button
-              onClick={() => {
-                navigatePrev(visiblePageNumber,setVisiblePageNumber,setDirection);
+      {activeQuestion && (
+        <>
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              sx={{
+                height: "8px",
+                postion: "fixed",
+                top: "0px",
+                zIndex: "999",
               }}
-              disabled={visiblePageNumber === 1}
-              sx={{ backgroundColor: "#0445af" }}
+            />
+          </Box>
+          <div className={`wrapper`}>
+            <VerticalAnimation
+              activeIndex={visiblePageNumber}
+              direction={direction}
             >
-              <ExpandLessIcon />
-            </Button>
-            <Button
-              onClick={() => {
-                navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber,setDirection);
-                var progressbar = Math.floor(
-                  (visiblePageNumber / pageLength) * 100
-                );
-                setProgress(progressbar);
-              }}
-              disabled={visiblePageNumber === pageLength}
-              sx={{ backgroundColor: "#0445af" }}
-            >
-              <ExpandMoreIcon />
-            </Button>
-          </ButtonGroup>
+              <Formpage question={activeQuestion} navigateNext={navigateNext} />
+            </VerticalAnimation>
 
-          <Button variant="contained" sx={{ backgroundColor: "#0445af " }}>
-            Powered by Ramailo.tech
-          </Button>
-        </div>
-      </div>
+            <div className="navigation">
+              <ButtonGroup
+                variant="contained"
+                aria-label="outlined primary button group"
+              >
+                <Button
+                  onClick={() => {
+                    navigatePrev(
+                      visiblePageNumber,
+                      setVisiblePageNumber,
+                      setDirection
+                    );
+                  }}
+                  disabled={visiblePageNumber === 1}
+                  sx={{ backgroundColor: "#0445af" }}
+                >
+                  <ExpandLessIcon />
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigateNext(
+                      visiblePageNumber,
+                      pageLength,
+                      setVisiblePageNumber,
+                      setDirection
+                    );
+                    var progressbar = Math.floor(
+                      (visiblePageNumber / pageLength) * 100
+                    );
+                    setProgress(progressbar);
+                  }}
+                  disabled={visiblePageNumber === pageLength}
+                  sx={{ backgroundColor: "#0445af" }}
+                >
+                  <ExpandMoreIcon />
+                </Button>
+              </ButtonGroup>
+
+              <Button variant="contained" sx={{ backgroundColor: "#0445af " }}>
+                Powered by Ramailo.tech
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

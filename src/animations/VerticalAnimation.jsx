@@ -6,7 +6,7 @@ const VerticalAnimation = ({ children, activeIndex, direction }) => {
       return {
         zIndex: 1,
         y: direction > 0 ? "100%" : "-100%",
-        opacity: 0,
+        opacity: 0.7,
       };
     },
     center: {
@@ -18,7 +18,7 @@ const VerticalAnimation = ({ children, activeIndex, direction }) => {
       return {
         zIndex: 1,
         y: direction < 0 ? "100%" : "-100%",
-        opacity: 0,
+        opacity: 0.7,
       };
     },
   };
@@ -33,7 +33,7 @@ const VerticalAnimation = ({ children, activeIndex, direction }) => {
         animate="center"
         exit="exit"
         transition={{
-          x: { type: "spring", stiffness: 50 },
+          x: { type: "spring", stiffness: 300 },
           opacity: { duration: 0.4 },
         }}
       >

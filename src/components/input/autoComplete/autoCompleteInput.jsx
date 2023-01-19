@@ -17,11 +17,11 @@ const AutoCompleteInput = ({ options, question }) => {
     setIsComponentVisible(true);
     let curr = inputRef.current.value;
     setValue(() => curr);
+    setFormValue({ ...formValue, [question]: curr });
   };
   useEffect(() => {
     if (options.includes(value)) {
       setFormValue({ ...formValue, [question]: value });
-     
     }
   }, [value, question]);
 

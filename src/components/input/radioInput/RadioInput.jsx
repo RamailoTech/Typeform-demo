@@ -13,10 +13,8 @@ export const RadioInput = ({ options, question }) => {
 
     globalIndex,
   } = useContext(FormContext);
-  console.log("setGlobalIndex", globalIndex);
   const handleClick = (e, i) => {
     setActive(i);
-    console.log(i, question);
     setFormValue({ ...formValue, [question]: options[i] });
   };
 

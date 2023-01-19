@@ -15,18 +15,19 @@ export const Formpage = ({ question, navigateNext }) => {
   const {
     visiblePageNumber,
     setVisiblePageNumber,
-    setPageLength,
     pageLength,
-    formValue,
     setProgress,
-    questions,
-    setDirection
+    setDirection,
   } = useContext(FormContext);
-  // let questions = useContext(QuestionContext);
   const inputref = useRef(null);
 
   const handleChange = () => {
-    navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber,setDirection);
+    navigateNext(
+      visiblePageNumber,
+      pageLength,
+      setVisiblePageNumber,
+      setDirection
+    );
     var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
     setProgress(progressbar);
   };
@@ -36,16 +37,12 @@ export const Formpage = ({ question, navigateNext }) => {
       inputref.current.focus();
     }
   }, [inputref, question]);
-  console.log(question);
+  // console.log(question);
 
-  const RenderForm = (item) => {
+  const RenderForm = (question) => {
     return (
       <>
-        <div
-          
-          className="transition-ease-in-out"
-        >
-
+        <div className="transition-ease-in-out">
           <Grid container spacing={0}>
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">
@@ -55,26 +52,26 @@ export const Formpage = ({ question, navigateNext }) => {
                     color="primary"
                     sx={{ fontSize: { md: "20px" } }}
                   />
-                  {item.question}
+                  {question.question}
                 </p>
-                {item.answer.type === "text" ? (
-                  <TextInput question={item.question} inputref={inputref} />
+                {question.answer.type === "text" ? (
+                  <TextInput question={question.question} inputref={inputref} />
                 ) : question.answer.type === "radio" ? (
                   <RadioInput
-                    question={item.question}
-                    options={item.answer.options}
+                    question={question.question}
+                    options={question.answer.options}
                   />
                 ) : question.answer.type === "dropdown" ? (
                   <Autocomplete
-                    question={item.question}
-                    options={item.answer.options}
+                    question={question.question}
+                    options={question.answer.options}
                   />
-                ) : item.answer.type === "dateInput" ? (
-                  <DateInput question={item.question} />
+                ) : question.answer.type === "dateInput" ? (
+                  <DateInput question={question.question} />
                 ) : (
                   <MultipleChoice
-                    options={item.answer.options}
-                    question={item.question}
+                    options={question.answer.options}
+                    question={question.question}
                   />
                 )}
 
@@ -114,28 +111,5 @@ export const Formpage = ({ question, navigateNext }) => {
     );
   };
 
-  const RenderChild = () => {
-    // const selectedOption = formValue[question.question];
-    // let children = question.answer.children[selectedOption];
-    // useEffect(() => {
-    //   if (selectedOption !== undefined && children !== undefined) {
-    //     setPageLength(pageLength + children.length);
-    //   }
-    // }, []);
-    // if (selectedOption !== undefined && children !== undefined) {
-    //   setPageLength(questions.length + children.length);
-    //   return children.map((child) => {
-    //     return RenderForm(child);
-    //   });
-    // } else {
-    //   return null;
-    // }
-  };
-
-  return (
-    <>
-      {RenderForm(question)}
-      {question.answer.children !== undefined ? RenderChild() : ""}
-    </>
-  );
+  return <>{RenderForm(question)}</>;
 };

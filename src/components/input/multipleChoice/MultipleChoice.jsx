@@ -8,6 +8,7 @@ const MultipleChoice = ({ options, question }) => {
   const [active, setActive] = useState([]);
   // const [selectedAnswer, setSelectedAnswer] = useState([]);
   const { formValue, setFormValue } = useContext(FormContext);
+  console.log("active", active);
 
   const handleClick = (e, i) => {
     if (active.includes(i)) {
