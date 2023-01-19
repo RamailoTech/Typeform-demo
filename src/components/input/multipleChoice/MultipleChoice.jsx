@@ -10,17 +10,24 @@ const MultipleChoice = ({ options, question }) => {
   const { formValue, setFormValue } = useContext(FormContext);
 
   const handleClick = (e, i) => {
-    console.log(i)
+    console.log("index",i)
+    console.log("active",active)
+  
     if (active.includes(i)) {
+     
       setActive(active.filter((curr) => curr !== i));
-     console.log('active',active);
+    
       setFormValue({
         ...formValue,
         [question]: formValue[question].filter((val) => val !== options[i]),
       });
+      console.log("active",active)
       return;
     }
+    
+    
     setActive([...active, i]);
+    console.log('lastactive',active);
 
     setFormValue({
       ...formValue,
@@ -41,18 +48,46 @@ const MultipleChoice = ({ options, question }) => {
     } else {
       setActive([]);
     }
+
+   
+  }, []);
+
+  useEffect(()=>{
     const handlelistner=(event)=>{
       var clickedIndex=AlphabetArray.indexOf(event.key)
       console.log(clickedIndex)
-      if(clickedIndex< options.length){
-        handleClick(event,clickedIndex,options[clickedIndex])
+      if(clickedIndex < options.length){
+         
+          if (active.includes(clickedIndex)) {
+     
+            setActive(active.filter((curr) => curr !== clickedIndex));
+          
+            setFormValue({
+              ...formValue,
+              [question]: formValue[question].filter((val) => val !== options[clickedIndex]),
+            });
+            console.log("active",active)
+            return;
+          }
+          
+        console.log("useeffect",active)
+          active.push(clickedIndex)
+       
+        setFormValue({
+          ...formValue,
+          [question]:options.filter((value,index)=>{
+           if(active.includes(index)) return value;
+          } )
+        }); 
+        console.log(formValue)
+      
       }
     }
     window.addEventListener("keydown",handlelistner)
     return()=>{
       window.removeEventListener("keydown",handlelistner)
     }
-  }, []);
+  },[active])
 
   return (
     <>

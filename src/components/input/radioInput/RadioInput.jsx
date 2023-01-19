@@ -28,11 +28,7 @@ export const RadioInput = ({ options, question }) => {
         handleClick(event,clickedIndex,options[clickedIndex])
 
       }
-      // if(event.key==='Enter'){
-      //   navigateNext(visiblePageNumber,pageLength,setVisiblePageNumber)
-      //   var progressbar=(Math.floor((visiblePageNumber/pageLength)*100));
-      //   setProgress(progressbar)
-      //  }
+      
 
     }
     

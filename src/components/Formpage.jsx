@@ -88,7 +88,7 @@ export const Formpage = ({ question, navigateNext }) => {
                     inputref={inputref}
                   />
                 ) : item.answer.type === "dateInput" ? (
-                  <DateInput question={item.question} />
+                  <DateInput question={item.question}  inputref={inputref} />
                 ) : (
                   <MultipleChoice
                     options={item.answer.options}
