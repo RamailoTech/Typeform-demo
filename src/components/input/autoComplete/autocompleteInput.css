@@ -42,7 +42,7 @@
 }
 
 .option_text {
-  border: 2px solid #0445af;
+  border: 3px solid #fff;
   background-color: #b3c7e7;
   width: 100%;
   padding: 10px;
@@ -51,4 +51,7 @@
   font-size: 22px;
   cursor: pointer;
   z-index: 999;
+}
+.active_input {
+  border: 3px solid #0445af;
 }

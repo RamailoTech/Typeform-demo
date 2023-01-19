@@ -5,9 +5,7 @@ export const CheckQuestion = (question) => {
   const questions = useContext(QuestionContext);
   const { formValue, visiblePageNumber, setVisiblePageNumber } =
     useContext(FormContext);
-  useEffect(() => {
-    setVisiblePageNumber((prev) => prev + 1);
-  }, []);
+
   // question is not a sub question
   if (question.parent === undefined) {
     return question;

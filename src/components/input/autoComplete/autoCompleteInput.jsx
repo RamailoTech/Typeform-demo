@@ -4,18 +4,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useComponentVisible from "../../../hooks/hook";
 import FormContext from "../../../context/form/FormContext";
-const AutoCompleteInput = ({ options, question }) => {
+const AutoCompleteInput = ({ options, question, inputref }) => {
   const { formValue, setFormValue, visiblePageNumber, setVisiblePageNumber } =
     useContext(FormContext);
 
-  const inputRef = useRef();
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
   const handleChange = () => {
     setIsComponentVisible(true);
-    let curr = inputRef.current.value;
+    let curr = inputref.current.value;
     setValue(() => curr);
     setFormValue({ ...formValue, [question]: curr });
   };
@@ -24,6 +23,12 @@ const AutoCompleteInput = ({ options, question }) => {
       setFormValue({ ...formValue, [question]: value });
     }
   }, [value, question]);
+
+  useEffect(() => {
+    if (formValue[question] !== undefined) {
+      setValue(formValue[question]);
+    }
+  }, []);
 
   return (
     <>
@@ -36,8 +41,8 @@ const AutoCompleteInput = ({ options, question }) => {
         >
           <input
             onChange={handleChange}
-            ref={inputRef}
-            value={formValue[question]}
+            ref={inputref}
+            value={value}
             type="text"
             className="autocomplete_text_answer_input"
             placeholder="Type or Select an option..."
@@ -75,21 +80,56 @@ const AutoCompleteInput = ({ options, question }) => {
 export default AutoCompleteInput;
 
 export const Option = ({ option, setValue }) => {
+  const [active, setActive] = useState(0);
   const { ref, setIsComponentVisible } = useComponentVisible(false);
-  const handleOptionClick = (e) => {
-    setValue(e.target.innerHTML);
+  const handleOptionClick = (e, index) => {
+    setValue(option[index]);
     setIsComponentVisible(false);
   };
+
+  useEffect(() => {
+    const handlelistner = (event) => {
+      if (event.key === "ArrowDown") {
+        if (active < option.length) {
+          setActive(active + 1);
+        }
+        if (active >= option.length) {
+          setActive(0);
+        }
+      }
+
+      if (event.key === "ArrowUp") {
+        if (active < option.length) {
+          setActive(active - 1);
+        }
+        if (active >= option.length) {
+          setActive(0);
+        }
+      }
+
+      if (event.key === "Enter") {
+        handleOptionClick(event, active);
+      }
+    };
+    window.addEventListener("keydown", handlelistner);
+    return () => {
+      window.removeEventListener("keydown", handlelistner);
+    };
+  }, [active]);
+
   return (
     <div ref={ref} className="option_wrapper">
       {option.map((op, index) => {
+        console.log(index, active);
         return (
           <span
             ref={ref}
-            className="option_text"
+            className={`option_text ${active === index && "active_input"}`}
             value={op}
             key={index}
-            onClick={handleOptionClick}
+            onClick={(e) => {
+              handleOptionClick(e, index);
+            }}
           >
             {op}
           </span>

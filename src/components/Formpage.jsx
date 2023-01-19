@@ -37,7 +37,17 @@ export const Formpage = ({ question, navigateNext }) => {
       inputref.current.focus();
     }
   }, [inputref, question]);
-  // console.log(question);
+  useEffect(() => {
+    const handlelistner = (event) => {
+      if (event.key === "Enter") {
+        handleChange();
+      }
+    };
+    document.addEventListener("keydown", handlelistner);
+    return () => {
+      document.removeEventListener("keydown", handlelistner);
+    };
+  }, []);
 
   const RenderForm = (question) => {
     return (
@@ -65,9 +75,10 @@ export const Formpage = ({ question, navigateNext }) => {
                   <Autocomplete
                     question={question.question}
                     options={question.answer.options}
+                    inputref={inputref}
                   />
                 ) : question.answer.type === "dateInput" ? (
-                  <DateInput question={question.question} />
+                  <DateInput question={question.question} inputref={inputref} />
                 ) : (
                   <MultipleChoice
                     options={question.answer.options}

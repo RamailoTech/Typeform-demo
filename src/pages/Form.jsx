@@ -33,9 +33,9 @@ export const Form = () => {
     setPageLength(arrayWithoutChildren.length);
   }, [questions, setPageLength]);
 
-  let question = questions[visiblePageNumber - 1];
+  let activeQuestion = questions[visiblePageNumber - 1];
 
-  let activeQuestion = CheckQuestion(question);
+  // let activeQuestion = CheckQuestion(question);
 
   console.log("activeQuestion", activeQuestion);
 

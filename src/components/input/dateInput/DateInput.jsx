@@ -3,7 +3,7 @@ import "./dateInput.css";
 import FormContext from "../../../context/form/FormContext";
 import Alert from "@mui/material/Alert";
 
-export const DateInput = ({ question }) => {
+export const DateInput = ({ question,inputref }) => {
   const { formValue, setFormValue } = useContext(FormContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [date, setDate] = useState({
@@ -70,6 +70,7 @@ export const DateInput = ({ question }) => {
         max={12}
         value={date.month}
         onChange={handleChange}
+        ref={inputref}
       />
       /
       <input
@@ -80,6 +81,7 @@ export const DateInput = ({ question }) => {
         value={date.day}
         min={1}
         onChange={handleChange}
+       
       />
       /
       <input
@@ -89,6 +91,7 @@ export const DateInput = ({ question }) => {
         type="number"
         value={date.year}
         onChange={handleChange}
+        
       />
       {!errorMessage ? null : <Alert severity="error">{errorMessage}</Alert>}
     </div>
