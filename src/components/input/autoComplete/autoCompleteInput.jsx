@@ -15,15 +15,16 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
     setIsComponentVisible(true);
     let curr = inputref.current.value;
     setValue(() => curr);
-    // setFormValue({ ...formValue, [question.name]: curr });
   };
   useEffect(() => {
     if (options.includes(value)) {
       setFormValue({ ...formValue, [question.name]: value });
     } else {
-      setFormValue({ ...formValue, [question.name]: "" });
+      // let name = question.name;
+      let { [question.name]: name, ...others } = formValue;
+      setFormValue({ others });
     }
-  }, [value, question]);
+  }, [value]);
 
   useEffect(() => {
     if (formValue[question.name] !== undefined) {
@@ -43,7 +44,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
           <input
             onChange={handleChange}
             ref={inputref}
-            value={value}
+            value={value || ""}
             type="text"
             className="autocomplete_text_answer_input"
             placeholder="Type or Select an option..."
@@ -68,7 +69,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
         {isComponentVisible && (
           <Option
             option={options.filter((op) =>
-              op.toLowerCase().includes(value.toLowerCase())
+              op.toLowerCase().includes(value ? value.toLowerCase() : "")
             )}
             setValue={setValue}
           />
@@ -81,7 +82,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
 export default AutoCompleteInput;
 
 export const Option = ({ option, setValue }) => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(null);
   const { ref, setIsComponentVisible } = useComponentVisible(false);
   const handleOptionClick = (e, index) => {
     setValue(option[index]);
@@ -92,19 +93,19 @@ export const Option = ({ option, setValue }) => {
     const handlelistner = (event) => {
       if (event.key === "ArrowDown") {
         if (active < option.length) {
-          setActive(active + 1);
-        }
-        if (active >= option.length) {
-          setActive(0);
+          setActive((prev) => {
+            if (prev === null || prev === option.length - 1) return 0;
+            return prev + 1;
+          });
         }
       }
 
       if (event.key === "ArrowUp") {
         if (active < option.length) {
-          setActive(active - 1);
-        }
-        if (active >= option.length) {
-          setActive(0);
+          setActive((prev) => {
+            if (prev === 0 || prev === null) return option.length - 1;
+            return prev - 1;
+          });
         }
       }
 
