@@ -15,7 +15,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
     setIsComponentVisible(true);
     let curr = inputref.current.value;
     setValue(() => curr);
-    setFormValue({ ...formValue, [question.name]: curr });
+    // setFormValue({ ...formValue, [question.name]: curr });
   };
   useEffect(() => {
     if (options.includes(value)) {
@@ -121,7 +121,6 @@ export const Option = ({ option, setValue }) => {
   return (
     <div ref={ref} className="option_wrapper">
       {option.map((op, index) => {
-        
         return (
           <span
             ref={ref}

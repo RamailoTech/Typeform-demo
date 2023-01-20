@@ -3,7 +3,6 @@ import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
 import { AlphabetArray, OptionList } from "../../../utils/option";
-import { navigateNext } from "../../../utils/navigate";
 
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
@@ -11,9 +10,8 @@ export const RadioInput = ({ options, question }) => {
 
   const handleClick = (e, i) => {
     setActive(i);
-    
+
     setFormValue({ ...formValue, [question.name]: options[i] });
-  
   };
 
   useEffect(() => {
@@ -25,11 +23,10 @@ export const RadioInput = ({ options, question }) => {
     const handlelistner = (event) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
       if (clickedIndex < options.length) {
-       
         setActive(clickedIndex);
-        console.log(options[clickedIndex])
+        console.log(options[clickedIndex]);
         setFormValue({ ...formValue, [question.name]: options[clickedIndex] });
-        console.log(formValue)
+        console.log(formValue);
       }
     };
 
@@ -38,7 +35,7 @@ export const RadioInput = ({ options, question }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [options,active]);
+  }, [options, active]);
 
   return (
     <>
