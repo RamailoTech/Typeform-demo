@@ -13,7 +13,6 @@ export const useOnKeyPress = (
     const keyPressHandler = (event) => {
       if (event.key === targetKey) {
         callback();
-        console.log(event);
         setFormValue({ ...formValue, [question]: options[index] });
       }
     };
