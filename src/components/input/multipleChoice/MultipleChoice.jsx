@@ -15,7 +15,7 @@ const MultipleChoice = ({ options, question }) => {
 
       setFormValue({
         ...formValue,
-        [question.name]: formValue[question.name].filter(
+        [question?.name]: formValue[question?.name].filter(
           (val) => val !== options[i]
         ),
       });
@@ -26,15 +26,15 @@ const MultipleChoice = ({ options, question }) => {
 
     setFormValue({
       ...formValue,
-      [question.name]: [...(formValue[question.name] || []), options[i]],
+      [question?.name]: [...(formValue[question?.name] || []), options[i]],
     });
   };
 
   useEffect(() => {
-    if (formValue[question.name] !== undefined) {
+    if (formValue[question?.name] !== undefined) {
       let newActive = [];
       options.forEach((option, index) => {
-        if (formValue[question.name].indexOf(option) !== -1) {
+        if (formValue[question?.name].indexOf(option) !== -1) {
           newActive.push(index);
         }
       });
@@ -48,13 +48,13 @@ const MultipleChoice = ({ options, question }) => {
   useEffect(() => {
     const handlelistner = (event) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
-      if (clickedIndex < options.length) {
+      if (clickedIndex < options?.length) {
         if (active.includes(clickedIndex)) {
           setActive(active.filter((curr) => curr !== clickedIndex));
 
           setFormValue({
             ...formValue,
-            [question.name]: formValue[question.name].filter(
+            [question?.name]: formValue[question?.name].filter(
               (val) => val !== options[clickedIndex]
             ),
           });
@@ -65,7 +65,7 @@ const MultipleChoice = ({ options, question }) => {
 
         setFormValue({
           ...formValue,
-          [question.name]: options.filter((value, index) => {
+          [question?.name]: options.filter((value, index) => {
             if (active.includes(index)) return value;
           }),
         });
@@ -79,7 +79,7 @@ const MultipleChoice = ({ options, question }) => {
 
   return (
     <>
-      {options.map((op, index) => {
+      {options?.map((op, index) => {
         return (
           <button
             className={`radio_input_button ${

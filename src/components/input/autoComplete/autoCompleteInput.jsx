@@ -22,7 +22,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
     } else {
       // let name = question.name;
       let { [question.name]: name, ...others } = formValue;
-      setFormValue({ others });
+      setFormValue({ ...others });
     }
   }, [value]);
 

@@ -62,34 +62,37 @@ export const Formpage = ({ question, navigateNext }) => {
                     color="primary"
                     sx={{ fontSize: { md: "20px" } }}
                   />
-                  {question.question}
+                  {question?.question}
                 </p>
-                {question.answer.type === "text" ? (
+                {question?.answer?.type === "text" ? (
                   <TextInput question={question} inputref={inputref} />
-                ) : question.answer.type === "radio" ? (
+                ) : question?.answer?.type === "radio" ? (
                   <RadioInput
                     question={question}
-                    options={question.answer.options}
+                    options={question?.answer?.options}
                   />
-                ) : question.answer.type === "dropdown" ? (
+                ) : question?.answer?.type === "dropdown" ? (
                   <Autocomplete
                     question={question}
-                    options={question.answer.options}
+                    options={question?.answer?.options}
                     inputref={inputref}
                   />
-                ) : question.answer.type === "dateInput" ? (
+                ) : question?.answer?.type === "dateInput" ? (
                   <DateInput question={question} inputref={inputref} />
                 ) : (
                   <MultipleChoice
-                    options={question.answer.options}
+                    options={question?.answer?.options}
                     question={question}
                   />
                 )}
 
                 <div>
                   {pageLength === visiblePageNumber ? (
-                    <Link to="/typeform/result" style={{textDecoration:"none"}}>
-                      <Button variant="contained" className="grid-button" >
+                    <Link
+                      to="/typeform/result"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Button variant="contained" className="grid-button">
                         Submit
                       </Button>
                     </Link>
