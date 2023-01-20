@@ -119,7 +119,26 @@ const QuestionState = (props) => {
         },
       ],
     },
-
+    {
+      name: "barcaOrReal",
+      answer: {
+        type: "radio",
+        options: ["barcelona", "realMadrid"],
+      },
+      question: "Which one would you prefer?",
+      conditions: [
+        {
+          valueOfField: "favouriteFootballer",
+          operation: "in",
+          value: ["messi", "ronaldo"],
+        },
+        {
+          valueOfField: "favouriteGame",
+          operation: "eq",
+          value: "Football",
+        },
+      ],
+    },
     {
       id: 3,
       name: "bestWayToEatHealthier",
