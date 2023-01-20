@@ -30,7 +30,7 @@ export const TextInput = ({ question, inputref }) => {
     };
   });
 
-  console.log("formValue", formValue);
+
 
   return (
     <input

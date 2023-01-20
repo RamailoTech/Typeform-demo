@@ -13,11 +13,10 @@ import { Button } from "@mui/material";
 import QuestionContext from "../context/questions/QuestionContext";
 
 const Result = () => {
-  const { formValue, setFormValue } = useContext(FormContext);
-  const { setVisiblePageNumber } = useContext(FormContext);
-  let questions = useContext(QuestionContext);
- 
-  
+  const { formValue, setFormValue, setVisiblePageNumber } =
+    useContext(FormContext);
+    let questions = useContext(QuestionContext);
+
   return (
     <Container sx={{ marginTop: "6rem" }}>
      

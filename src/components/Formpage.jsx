@@ -10,7 +10,6 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import { Link } from "react-router-dom";
-import QuestionState from "../context/questions/QuestionState";
 
 export const Formpage = ({ question, navigateNext }) => {
   const {
@@ -89,8 +88,8 @@ export const Formpage = ({ question, navigateNext }) => {
 
                 <div>
                   {pageLength === visiblePageNumber ? (
-                    <Link to="/typeform/result">
-                      <Button variant="contained" className="grid-button">
+                    <Link to="/typeform/result" style={{textDecoration:"none"}}>
+                      <Button variant="contained" className="grid-button" >
                         Submit
                       </Button>
                     </Link>
