@@ -28,6 +28,9 @@ export const RadioInput = ({ options, question }) => {
         setFormValue({ ...formValue, [question.name]: options[clickedIndex] });
         console.log(formValue);
       }
+      if (event.key === "Enter") {
+        handleClick(event, active);
+      }
     };
 
     window.addEventListener("keydown", handlelistner);
