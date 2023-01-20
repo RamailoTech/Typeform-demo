@@ -5,6 +5,7 @@ const QuestionState = (props) => {
   const questions = [
     {
       id: 0,
+      name: "yourName",
       question: "Hello, what's your name?",
       answer: {
         type: "text",
@@ -12,6 +13,7 @@ const QuestionState = (props) => {
     },
     {
       id: 1,
+      name: "SelectYourGender",
       question: "Select your gender",
       answer: {
         type: "radio",
@@ -20,91 +22,141 @@ const QuestionState = (props) => {
     },
     {
       id: 6,
+      name: "onYourMind",
       question: "What's on your mind?",
-      parentQuestion: "Select your gender",
-
-      parent: "Male",
+      conditions: [
+        {
+          valueOfField: "SelectYourGender",
+          operation: "eq",
+          value: "Male",
+        },
+      ],
       answer: {
         type: "text",
       },
     },
     {
       id: 9,
+      name: "favouriteWebSeries",
       question: "Your  favourite web-series?",
-      parentQuestion: "Select your gender",
-
-      parent: "Male",
+      conditions: [
+        {
+          valueOfField: "SelectYourGender",
+          operation: "eq",
+          value: "Male",
+        },
+      ],
       answer: {
         type: "text",
       },
     },
     {
       id: 8,
+      name: "favouritePlay",
       question: "Your favourite play?",
-      parent: "Female",
-      parentQuestion: "Select your gender",
+      conditions: [
+        {
+          valueOfField: "SelectYourGender",
+          operation: "eq",
+          value: "Female",
+        },
+      ],
       answer: {
         type: "text",
       },
     },
     {
       id: 2,
+      name: "favouriteGame",
       question: "What is your favourite game?",
       answer: {
         type: "radio",
         options: ["Cricket", "Football"],
-        children: {
-          Cricket: [
-            {
-              id: 6,
-              question: "Your favourite Crickter?",
-              answer: {
-                type: "text",
-              },
-            },
-            {
-              id: 9,
-              question: "Your least favourite Crickter?",
-              answer: {
-                type: "text",
-              },
-            },
-          ],
-          Football: [
-            {
-              id: 7,
-              question: "Your favourite Footballer?",
-              answer: {
-                type: "text",
-              },
-            },
-            {
-              id: 8,
-              question: "Your least favourite Footballer?",
-              answer: {
-                type: "text",
-              },
-            },
-          ],
-        },
       },
+    },
+    {
+      id: 6,
+      name: "favouriteCrickter",
+      question: "Your favourite Crickter?",
+      conditions: [
+        {
+          valueOfField: "favouriteGame",
+          operation: "eq",
+          value: "Cricket",
+        },
+      ],
+      answer: {
+        type: "text",
+      },
+    },
+    {
+      name: "leastFavouriteCrickter",
+      id: 9,
+      question: "Your least favourite Crickter?",
+      conditions: [
+        {
+          valueOfField: "favouriteGame",
+          operation: "eq",
+          value: "Cricket",
+        },
+      ],
+      answer: {
+        type: "text",
+      },
+    },
+    {
+      id: 7,
+      name: "favouriteFootballer",
+      question: "Your favourite Footballer?",
+      answer: {
+        type: "text",
+      },
+      conditions: [
+        {
+          valueOfField: "favouriteGame",
+          operation: "eq",
+          value: "Football",
+        },
+      ],
     },
 
     {
       id: 3,
+      name: "bestWayToEatHealthier",
       question: "Which is the best way to eat healthier",
+
       answer: {
         type: "multiple_choice",
         options: [
           "Vegan diet",
+
           "Protein-rich food",
+
           "Balanced diet",
+
           "Only fresh fruits",
         ],
       },
     },
     {
+      name: "foodsYouLike",
+      answer: {
+        type: "multipleChoice",
+        options: ["pizza", "burger", "pasta"],
+      },
+      question: "What foods do you like?",
+
+      conditions: [
+        {
+          valueOfField: "bestWayToEatHealthier",
+          operetion: "in",
+          value: ["Vegan diet", "Protein-rich food"],
+        },
+      ],
+    },
+    {
       id: 4,
+      name: "favouriteColor",
       question: "Select your favourite color",
       answer: {
         type: "dropdown",
@@ -113,6 +165,7 @@ const QuestionState = (props) => {
     },
     {
       id: 5,
+      name: "yourBirthdate",
       question: "Enter your birth date",
       answer: {
         type: "dateInput",

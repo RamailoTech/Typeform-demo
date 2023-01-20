@@ -3,7 +3,7 @@ import "./dateInput.css";
 import FormContext from "../../../context/form/FormContext";
 import Alert from "@mui/material/Alert";
 
-export const DateInput = ({ question,inputref }) => {
+export const DateInput = ({ question, inputref }) => {
   const { formValue, setFormValue } = useContext(FormContext);
   const [errorMessage, setErrorMessage] = useState(null);
   const [date, setDate] = useState({
@@ -56,7 +56,7 @@ export const DateInput = ({ question,inputref }) => {
   useEffect(() => {
     if (date.day && date.month && date.year) {
       let dates = `${date.day}/${date.month}/${date.year}`;
-      setFormValue({ ...formValue, [question]: dates });
+      setFormValue({ ...formValue, [question.name]: dates });
     }
   }, [date.day, date.month, date.year]);
   return (
@@ -81,7 +81,6 @@ export const DateInput = ({ question,inputref }) => {
         value={date.day}
         min={1}
         onChange={handleChange}
-       
       />
       /
       <input
@@ -91,7 +90,6 @@ export const DateInput = ({ question,inputref }) => {
         type="number"
         value={date.year}
         onChange={handleChange}
-        
       />
       {!errorMessage ? null : <Alert severity="error">{errorMessage}</Alert>}
     </div>

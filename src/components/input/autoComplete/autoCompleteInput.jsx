@@ -15,19 +15,19 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
     setIsComponentVisible(true);
     let curr = inputref.current.value;
     setValue(() => curr);
-    setFormValue({ ...formValue, [question]: curr });
+    setFormValue({ ...formValue, [question.name]: curr });
   };
   useEffect(() => {
     if (options.includes(value)) {
-      setFormValue({ ...formValue, [question]: value });
+      setFormValue({ ...formValue, [question.name]: value });
     } else {
-      setFormValue({ ...formValue, [question]: "" });
+      setFormValue({ ...formValue, [question.name]: "" });
     }
   }, [value, question]);
 
   useEffect(() => {
-    if (formValue[question] !== undefined) {
-      setValue(formValue[question]);
+    if (formValue[question.name] !== undefined) {
+      setValue(formValue[question.name]);
     }
   }, []);
 

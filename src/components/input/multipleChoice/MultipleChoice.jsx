@@ -8,39 +8,33 @@ const MultipleChoice = ({ options, question }) => {
   const [active, setActive] = useState([]);
   // const [selectedAnswer, setSelectedAnswer] = useState([]);
   const { formValue, setFormValue } = useContext(FormContext);
-  console.log("active", active);
 
   const handleClick = (e, i) => {
-    console.log("index",i)
-    console.log("active",active)
-  
     if (active.includes(i)) {
-     
       setActive(active.filter((curr) => curr !== i));
-    
+
       setFormValue({
         ...formValue,
-        [question]: formValue[question].filter((val) => val !== options[i]),
+        [question.name]: formValue[question.name].filter(
+          (val) => val !== options[i]
+        ),
       });
-      console.log("active",active)
       return;
     }
-    
-    
+
     setActive([...active, i]);
-    console.log('lastactive',active);
 
     setFormValue({
       ...formValue,
-      [question]: [...(formValue[question] || []), options[i]],
+      [question.name]: [...(formValue[question.name] || []), options[i]],
     });
   };
 
   useEffect(() => {
-    if (formValue[question] !== undefined) {
+    if (formValue[question.name] !== undefined) {
       let newActive = [];
       options.forEach((option, index) => {
-        if (formValue[question].indexOf(option) !== -1) {
+        if (formValue[question.name].indexOf(option) !== -1) {
           newActive.push(index);
         }
       });
@@ -49,46 +43,39 @@ const MultipleChoice = ({ options, question }) => {
     } else {
       setActive([]);
     }
-
-   
   }, []);
 
-  useEffect(()=>{
-    const handlelistner=(event)=>{
-      var clickedIndex=AlphabetArray.indexOf(event.key)
-      console.log(clickedIndex)
-      if(clickedIndex < options.length){
-         
-          if (active.includes(clickedIndex)) {
-     
-            setActive(active.filter((curr) => curr !== clickedIndex));
-          
-            setFormValue({
-              ...formValue,
-              [question]: formValue[question].filter((val) => val !== options[clickedIndex]),
-            });
-            console.log("active",active)
-            return;
-          }
-          
-        console.log("useeffect",active)
-          active.push(clickedIndex)
-       
+  useEffect(() => {
+    const handlelistner = (event) => {
+      var clickedIndex = AlphabetArray.indexOf(event.key);
+      if (clickedIndex < options.length) {
+        if (active.includes(clickedIndex)) {
+          setActive(active.filter((curr) => curr !== clickedIndex));
+
+          setFormValue({
+            ...formValue,
+            [question.name]: formValue[question.name].filter(
+              (val) => val !== options[clickedIndex]
+            ),
+          });
+          return;
+        }
+
+        active.push(clickedIndex);
+
         setFormValue({
           ...formValue,
-          [question]:options.filter((value,index)=>{
-           if(active.includes(index)) return value;
-          } )
-        }); 
-        console.log(formValue)
-      
+          [question.name]: options.filter((value, index) => {
+            if (active.includes(index)) return value;
+          }),
+        });
       }
-    }
-    window.addEventListener("keydown",handlelistner)
-    return()=>{
-      window.removeEventListener("keydown",handlelistner)
-    }
-  },[active])
+    };
+    window.addEventListener("keydown", handlelistner);
+    return () => {
+      window.removeEventListener("keydown", handlelistner);
+    };
+  }, [active]);
 
   return (
     <>

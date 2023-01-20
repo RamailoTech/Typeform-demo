@@ -10,6 +10,7 @@ import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import { Link } from "react-router-dom";
+import QuestionState from "../context/questions/QuestionState";
 
 export const Formpage = ({ question, navigateNext }) => {
   const {
@@ -65,24 +66,24 @@ export const Formpage = ({ question, navigateNext }) => {
                   {question.question}
                 </p>
                 {question.answer.type === "text" ? (
-                  <TextInput question={question.question} inputref={inputref} />
+                  <TextInput question={question} inputref={inputref} />
                 ) : question.answer.type === "radio" ? (
                   <RadioInput
-                    question={question.question}
+                    question={question}
                     options={question.answer.options}
                   />
                 ) : question.answer.type === "dropdown" ? (
                   <Autocomplete
-                    question={question.question}
+                    question={question}
                     options={question.answer.options}
                     inputref={inputref}
                   />
                 ) : question.answer.type === "dateInput" ? (
-                  <DateInput question={question.question} inputref={inputref} />
+                  <DateInput question={question} inputref={inputref} />
                 ) : (
                   <MultipleChoice
                     options={question.answer.options}
-                    question={question.question}
+                    question={question}
                   />
                 )}
 

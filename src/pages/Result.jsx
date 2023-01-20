@@ -10,22 +10,28 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormContext from "../context/form/FormContext";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import QuestionContext from "../context/questions/QuestionContext";
 
 const Result = () => {
   const { formValue, setFormValue } = useContext(FormContext);
   const { setVisiblePageNumber } = useContext(FormContext);
-
+  let questions = useContext(QuestionContext);
+ 
+  
   return (
     <Container sx={{ marginTop: "6rem" }}>
+     
       {Object.entries(formValue).map(([key, value]) => (
+        
         <div key={key}>
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-            >
-              <Typography>{key}</Typography>
+            > 
+           
+              <Typography>{questions.map((quest,index) => quest.name === key?quest.question:"")}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>{value + " "}</Typography>

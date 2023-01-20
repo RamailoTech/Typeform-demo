@@ -10,18 +10,17 @@ export const RadioInput = ({ options, question }) => {
 
   const handleClick = (e, i) => {
     setActive(i);
-    setFormValue({ ...formValue, [question]: options[i] });
+    setFormValue({ ...formValue, [question.name]: options[i] });
   };
 
   useEffect(() => {
-    if (formValue[question] !== undefined) {
-      setActive(options.indexOf(formValue[question]));
+    if (formValue[question.name] !== undefined) {
+      setActive(options.indexOf(formValue[question.name]));
     } else {
       setActive(null);
     }
     const handlelistner = (event) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
-      console.log(clickedIndex);
       if (clickedIndex < options.length) {
         handleClick(event, clickedIndex, options[clickedIndex]);
       }
