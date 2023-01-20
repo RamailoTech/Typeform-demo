@@ -20,9 +20,10 @@ export const CheckQuestion = (question) => {
   }
   // question is a sub question and  is not  selected
   if (
-    question.parent !== undefined &&
+    question.parent !== undefined &
     formValue[question.parentQuestion] !== question.parent
   ) {
+    console.log( question.parent)
     // setVisiblePageNumber((prev) => prev + 1);
     return CheckQuestion(questions[visiblePageNumber]);
   }
