@@ -24,17 +24,13 @@ export const Form = () => {
     setDirection,
     setPageLength,
   } = useContext(FormContext);
-  useEffect(() => {
-    const arrayWithoutChildren = questions.filter(
-      (question) => question.conditions === undefined
-    );
-
-    setPageLength(arrayWithoutChildren.length);
-  }, [questions, setPageLength]);
 
   const filteredQuestions = useFilteredQuestions();
 
   let activeQuestion = filteredQuestions[visiblePageNumber - 1];
+  useEffect(() => {
+    setPageLength(filteredQuestions.length);
+  }, [filteredQuestions, setPageLength]);
 
   console.log("form active question", activeQuestion);
   return (
