@@ -52,7 +52,7 @@ export const Formpage = ({ question, navigateNext }) => {
   const RenderForm = (question) => {
     return (
       <>
-        <div className="transition-ease-in-out">
+        <div className="transition-ease-in-oxut">
           <Grid container spacing={0}>
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">

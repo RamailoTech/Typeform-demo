@@ -21,7 +21,7 @@ const Result = () => {
     <Container sx={{ marginTop: "6rem" }}>
      
       {Object.entries(formValue).map(([key, value]) => (
-        
+      
         <div key={key}>
           <Accordion>
             <AccordionSummary
@@ -33,10 +33,12 @@ const Result = () => {
               <Typography>{questions.map((quest,index) => quest.name === key?quest.question:"")}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{value + " "}</Typography>
+              <Typography>{value+''}</Typography>
             </AccordionDetails>
           </Accordion>
         </div>
+          
+
       ))}
       <Link to="/">
         <Button
