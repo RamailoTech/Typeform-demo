@@ -31,7 +31,7 @@ const Result = () => {
                   id="panel1a-header"
                 >
                   <Typography>
-                    {questions.map((quest, index) =>
+                    {questions.map((quest, i) =>
                       quest.name === key ? quest.question : ""
                     )}
                   </Typography>
