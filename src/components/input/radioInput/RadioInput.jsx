@@ -24,9 +24,7 @@ export const RadioInput = ({ options, question }) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
       if (clickedIndex < options.length) {
         setActive(clickedIndex);
-     
         setFormValue({ ...formValue, [question.name]: options[clickedIndex] });
-        
       }
       if (event.key === "Enter") {
         handleClick(event, active);

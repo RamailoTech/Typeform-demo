@@ -15,31 +15,34 @@ import QuestionContext from "../context/questions/QuestionContext";
 const Result = () => {
   const { formValue, setFormValue, setVisiblePageNumber } =
     useContext(FormContext);
-    let questions = useContext(QuestionContext);
+  let questions = useContext(QuestionContext);
 
   return (
     <Container sx={{ marginTop: "6rem" }}>
-     
-      {Object.entries(formValue).map(([key, value]) => (
-      
-        <div key={key}>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            > 
-           
-              <Typography>{questions.map((quest,index) => quest.name === key?quest.question:"")}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>{value+''}</Typography>
-            </AccordionDetails>
-          </Accordion>
-        </div>
-          
-
-      ))}
+      {Object.entries(formValue).map(
+        ([key, value]) =>
+          value &&
+          value.length > 0 && (
+            <div key={key}>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>
+                    {questions.map((quest, index) =>
+                      quest.name === key ? quest.question : ""
+                    )}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{value && value + " "}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+          )
+      )}
       <Link to="/">
         <Button
           variant="contained"
