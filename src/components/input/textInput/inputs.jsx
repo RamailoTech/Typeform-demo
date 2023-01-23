@@ -11,6 +11,7 @@ export const TextInput = ({ question, inputref }) => {
     pageLength,
     setVisiblePageNumber,
     setProgress,
+    setDirection,
   } = useContext(FormContext);
 
   const handleChange = (e) => {
@@ -19,7 +20,12 @@ export const TextInput = ({ question, inputref }) => {
   useEffect(() => {
     const handlelistner = (event) => {
       if (event.key === "Enter") {
-        navigateNext(visiblePageNumber, pageLength, setVisiblePageNumber);
+        navigateNext(
+          visiblePageNumber,
+          pageLength,
+          setVisiblePageNumber,
+          setDirection
+        );
         var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
         setProgress(progressbar);
       }
@@ -29,8 +35,6 @@ export const TextInput = ({ question, inputref }) => {
       document.removeEventListener("keydown", handlelistner);
     };
   });
-
-
 
   return (
     <input

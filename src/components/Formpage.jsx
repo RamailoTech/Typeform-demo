@@ -9,7 +9,7 @@ import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
 import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
 import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Formpage = ({ question, navigateNext }) => {
   const {
@@ -20,6 +20,7 @@ export const Formpage = ({ question, navigateNext }) => {
     setDirection,
   } = useContext(FormContext);
   const inputref = useRef(null);
+  const navigate = useNavigate();
 
   const handleChange = () => {
     navigateNext(
@@ -40,6 +41,9 @@ export const Formpage = ({ question, navigateNext }) => {
   useEffect(() => {
     const handlelistner = (event) => {
       if (event.key === "Enter") {
+        if (pageLength === visiblePageNumber) {
+          return navigate("/typeform/result");
+        }
         handleChange();
       }
     };
