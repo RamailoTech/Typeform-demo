@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
-import { AlphabetArray, OptionList } from "../../../utils/option";
+import { AlphabetArray } from "../../../utils/option";
 
 export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
@@ -49,7 +49,7 @@ export const RadioInput = ({ options, question }) => {
             <div className="radio_input_content_wrapper">
               <span className="radio_input_button_option">
                 {" "}
-                {OptionList[i]}
+                {AlphabetArray[i].toUpperCase()}
               </span>
               <p
                 onClick={(e) => {

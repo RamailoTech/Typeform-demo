@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./autocompleteInput.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -72,6 +72,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
               op.toLowerCase().includes(value ? value.toLowerCase() : "")
             )}
             setValue={setValue}
+            value={value}
           />
         )}
       </div>
@@ -81,7 +82,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
 
 export default AutoCompleteInput;
 
-export const Option = ({ option, setValue }) => {
+export const Option = ({ option, setValue, value }) => {
   const [active, setActive] = useState(null);
   const { ref, setIsComponentVisible } = useComponentVisible(false);
   const handleOptionClick = (e, index) => {
@@ -117,7 +118,7 @@ export const Option = ({ option, setValue }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [active]);
+  }, [active, value]);
 
   return (
     <div ref={ref} className="option_wrapper">

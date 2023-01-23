@@ -107,7 +107,7 @@ export const Formpage = ({ question, navigateNext }) => {
                       endIcon={
                         <CheckIcon
                           sx={{
-                            fontSize: "40",
+                            fontSize: { lg: "large" },
                             marginLeft: { md: "-8px", lg: "-2px" },
                           }}
                         />
