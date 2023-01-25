@@ -9,7 +9,7 @@ const FormState = (props) => {
   const [progress, setProgress] = useState(0);
   const [formValue, setFormValue] = useState({});
   const [direction, setDirection] = useState(0);
-
+  const [isComponentVisible, setIsComponentVisible] =useState(false);
   const navigateNext = () => {
     if (visiblePageNumber < pageLength) {
       setVisiblePageNumber(visiblePageNumber + 1);
@@ -39,7 +39,9 @@ const FormState = (props) => {
         navigateNext,
         navigatePrev,
         setProgress,
-        progress
+        progress,
+        isComponentVisible,
+        setIsComponentVisible
       }}
     >
       {props.children}

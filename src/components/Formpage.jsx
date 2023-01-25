@@ -1,57 +1,54 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import FormContext from "../context/form/FormContext";
 import { Link, useNavigate } from "react-router-dom";
 import InputRenderer from "./InputRenderer";
+import useComponentVisible from "../hooks/hook";
 
 export const Formpage = ({ question }) => {
-  const { visiblePageNumber, pageLength, navigatePrev, navigateNext } =
-    useContext(FormContext);
-  // const inputref = useRef(null);
+  const {
+    visiblePageNumber,
+    isComponentVisible,
+    pageLength,
+    navigatePrev,
+    navigateNext,
+  } = useContext(FormContext);
+  const inputref = useRef(null);
   const navigate = useNavigate();
-
-  const handleChange = useCallback(() => {
-    navigateNext();
-   
-  }, [navigateNext, pageLength, visiblePageNumber]);
-
-  // useEffect(() => {
-  //   if (inputref.current) {
-  //     inputref.current.focus();
-  //   }
-  // }, [inputref, question]);
-
-
-  const handlelistner = (event) => {
-    if (event.key === "Enter") {
-      if (pageLength === visiblePageNumber) {
-        return navigate("/typeform/result");
-      }
-      handleChange();
-    }
-    if (event.key === "ArrowDown") {
-      navigateNext();
-     }
-     if (event.key === "ArrowUp") {
-      navigatePrev();
-     }
-  };
-
+  console.log(isComponentVisible)
   useEffect(() => {
+    if (inputref.current) {
+      inputref.current.focus();
+    }
+  }, [inputref, question]);
+  useEffect(() => {
+    const handlelistner = (event) => {
+      if (event.key === "Enter") {
+        if (pageLength === visiblePageNumber) {
+          return navigate("/typeform/result");
+        }
+        navigateNext();
+      }
+      if (event.key === "ArrowDown" && !isComponentVisible) {
+        navigateNext();
+       }
+       if (event.key === "ArrowUp" && !isComponentVisible) {
+        navigatePrev();
+       }
+    };
     document.addEventListener("keydown", handlelistner);
     return () => {
       document.removeEventListener("keydown", handlelistner);
     };
-  }, [handleChange, navigate, pageLength, visiblePageNumber]);
+  }, [navigateNext,navigatePrev, navigate, pageLength, visiblePageNumber]);
 
   const RenderForm = (question) => {
     return (
       <>
-        <div className="transition-ease-in-oxut">
+        <div className="transition-ease-in-out">
           <Grid container spacing={0}>
             <Grid item xs={6} className="wrapper-grid1">
               <Box className="box-grid">
@@ -64,6 +61,7 @@ export const Formpage = ({ question }) => {
                   {question?.question}
                 </p>
                 <InputRenderer question={question} />
+
                 <div>
                   {pageLength === visiblePageNumber ? (
                     <Link
@@ -86,7 +84,7 @@ export const Formpage = ({ question }) => {
                           }}
                         />
                       }
-                      onClick={handleChange}
+                      onClick={() => navigateNext()}
                     >
                       OK
                     </Button>

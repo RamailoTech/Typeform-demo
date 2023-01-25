@@ -6,8 +6,6 @@ import Autocomplete from "./input/autoComplete/autoCompleteInput";
 import { DateInput } from "./input/dateInput";
 
 const InputRenderer = ({ question }) => {
-  //   console.log("InputRenderer", question);
-
   const inputRef = useCallback((node) => {
     if (node) {
       node.focus();

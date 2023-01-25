@@ -1,14 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import "../input.css";
 import FormContext from "../../../context/form/FormContext";
-// import { navigateNext } from "../../../utils/navigate";
 
 export const TextInput = ({ question, inputref }) => {
-  const {
-    formValue,
-    setFormValue,
-    navigateNext,
-  } = useContext(FormContext);
+  const { formValue, setFormValue, navigateNext } = useContext(FormContext);
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [question.name]: e.target.value });
@@ -17,7 +12,6 @@ export const TextInput = ({ question, inputref }) => {
     const handlelistner = (event) => {
       if (event.key === "Enter") {
         navigateNext();
-       
       }
     };
     document.addEventListener("keydown", handlelistner);
