@@ -27,7 +27,7 @@ export const Form = () => {
   useEffect(() => {
     setPageLength(filteredQuestions.length);
   }, [filteredQuestions, setPageLength]);
- 
+
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -66,7 +66,7 @@ export const Form = () => {
             </Button>
             <Button
               onClick={() => {
-                navigateNext();    
+                navigateNext();
               }}
               disabled={visiblePageNumber === pageLength}
               sx={{ backgroundColor: "#0445af" }}
