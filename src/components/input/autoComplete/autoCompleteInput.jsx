@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import "./autocompleteInput.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -18,19 +18,22 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
   };
   useEffect(() => {
     if (options.includes(value)) {
-      setFormValue({ ...formValue, [question.name]: value });
+      setFormValue((prev) => {
+        return { ...prev, [question.name]: value };
+      });
     } else {
-      // let name = question.name;
-      let { [question.name]: name, ...others } = formValue;
-      setFormValue({ ...others });
+      setFormValue((prev) => {
+        let { [question.name]: name, ...others } = prev;
+        return { ...others };
+      });
     }
-  }, [value]);
+  }, [options, question.name, setFormValue, value]);
 
   useEffect(() => {
     if (formValue[question.name] !== undefined) {
       setValue(formValue[question.name]);
     }
-  }, []);
+  }, [formValue, question.name]);
 
   return (
     <>
@@ -85,10 +88,13 @@ export default AutoCompleteInput;
 export const Option = ({ option, setValue, value }) => {
   const [active, setActive] = useState(null);
   const { ref, setIsComponentVisible } = useComponentVisible(false);
-  const handleOptionClick = (e, index) => {
-    setValue(option[index]);
-    setIsComponentVisible(false);
-  };
+  const handleOptionClick = useCallback(
+    (e, index) => {
+      setValue(option[index]);
+      setIsComponentVisible(false);
+    },
+    [option, setIsComponentVisible, setValue]
+  );
 
   useEffect(() => {
     const handlelistner = (event) => {
@@ -118,7 +124,7 @@ export const Option = ({ option, setValue, value }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [active, value]);
+  }, [active, handleOptionClick, option.length, value]);
 
   return (
     <div ref={ref} className="option_wrapper">

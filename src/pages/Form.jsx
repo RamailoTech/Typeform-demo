@@ -8,19 +8,18 @@ import "../assets/styles/form.css";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Box } from "@mui/material";
 import VerticalAnimation from "../animations/VerticalAnimation";
-import { navigateNext, navigatePrev } from "../utils/navigate";
 import { useFilteredQuestions } from "../hooks/useQuestion";
 
 export const Form = () => {
   const {
     visiblePageNumber,
-    setVisiblePageNumber,
     pageLength,
     progress,
     setProgress,
     direction,
-    setDirection,
     setPageLength,
+    navigateNext,
+    navigatePrev,
   } = useContext(FormContext);
 
   const filteredQuestions = useFilteredQuestions();
@@ -59,11 +58,7 @@ export const Form = () => {
           >
             <Button
               onClick={() => {
-                navigatePrev(
-                  visiblePageNumber,
-                  setVisiblePageNumber,
-                  setDirection
-                );
+                navigatePrev();
               }}
               disabled={visiblePageNumber === 1}
               sx={{ backgroundColor: "#0445af" }}
@@ -72,12 +67,7 @@ export const Form = () => {
             </Button>
             <Button
               onClick={() => {
-                navigateNext(
-                  visiblePageNumber,
-                  pageLength,
-                  setVisiblePageNumber,
-                  setDirection
-                );
+                navigateNext();
                 var progressbar = Math.floor(
                   (visiblePageNumber / pageLength) * 100
                 );

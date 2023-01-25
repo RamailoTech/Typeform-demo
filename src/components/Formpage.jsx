@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
@@ -11,27 +11,23 @@ import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Formpage = ({ question, navigateNext }) => {
+export const Formpage = ({ question }) => {
   const {
     visiblePageNumber,
-    setVisiblePageNumber,
+
     pageLength,
     setProgress,
-    setDirection,
+
+    navigateNext,
   } = useContext(FormContext);
   const inputref = useRef(null);
   const navigate = useNavigate();
 
-  const handleChange = () => {
-    navigateNext(
-      visiblePageNumber,
-      pageLength,
-      setVisiblePageNumber,
-      setDirection
-    );
+  const handleChange = useCallback(() => {
+    navigateNext();
     var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
     setProgress(progressbar);
-  };
+  }, [navigateNext, pageLength, setProgress, visiblePageNumber]);
 
   useEffect(() => {
     if (inputref.current) {
@@ -51,7 +47,7 @@ export const Formpage = ({ question, navigateNext }) => {
     return () => {
       document.removeEventListener("keydown", handlelistner);
     };
-  }, []);
+  }, [handleChange, navigate, pageLength, visiblePageNumber]);
 
   const RenderForm = (question) => {
     return (

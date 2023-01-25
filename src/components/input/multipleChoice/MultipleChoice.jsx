@@ -13,11 +13,13 @@ const MultipleChoice = ({ options, question }) => {
     if (active.includes(i)) {
       setActive(active.filter((curr) => curr !== i));
 
-      setFormValue({
-        ...formValue,
-        [question?.name]: formValue[question?.name].filter(
-          (val) => val !== options[i]
-        ),
+      setFormValue((prev) => {
+        return {
+          ...prev,
+          [question?.name]: prev[question?.name].filter(
+            (val) => val !== options[i]
+          ),
+        };
       });
       return;
     }
@@ -43,7 +45,7 @@ const MultipleChoice = ({ options, question }) => {
     } else {
       setActive([]);
     }
-  }, []);
+  }, [formValue, options, question?.name]);
 
   useEffect(() => {
     const handlelistner = (event) => {
@@ -52,22 +54,28 @@ const MultipleChoice = ({ options, question }) => {
         if (active.includes(clickedIndex)) {
           setActive(active.filter((curr) => curr !== clickedIndex));
 
-          setFormValue({
-            ...formValue,
-            [question?.name]: formValue[question?.name].filter(
-              (val) => val !== options[clickedIndex]
-            ),
+          //prev
+
+          setFormValue((prev) => {
+            return {
+              ...prev,
+              [question?.name]: prev[question?.name].filter(
+                (val) => val !== options[clickedIndex]
+              ),
+            };
           });
           return;
         }
 
         active.push(clickedIndex);
 
-        setFormValue({
-          ...formValue,
-          [question?.name]: options.filter((value, index) => {
-            if (active.includes(index)) return value;
-          }),
+        setFormValue((prev) => {
+          return {
+            ...prev,
+            [question?.name]: options.filter((value, index) =>
+              active.includes(index)
+            ),
+          };
         });
       }
     };
@@ -75,7 +83,7 @@ const MultipleChoice = ({ options, question }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [active]);
+  }, [active, options, question?.name, setFormValue]);
 
   return (
     <>
