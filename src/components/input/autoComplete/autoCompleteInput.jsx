@@ -9,7 +9,7 @@ const AutoCompleteInput = ({ options, question }) => {
 
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(false);
+    useComponentVisible();
 
   const handleChange = (e) => {
     setIsComponentVisible(true);
@@ -86,7 +86,7 @@ export default AutoCompleteInput;
 
 export const Option = ({ option, setValue, value }) => {
   const [active, setActive] = useState(null);
-  const { ref, setIsComponentVisible } = useComponentVisible(false);
+  const { ref, setIsComponentVisible } = useComponentVisible();
   const handleOptionClick = useCallback(
     (e, index) => {
       setValue(option[index]);

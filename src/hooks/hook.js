@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import {  useEffect, useRef, useContext } from "react";
+import FormContext from "../context/form/FormContext";
 
-export default function useComponentVisible(initialIsVisible) {
-  const [isComponentVisible, setIsComponentVisible] =
-    useState(initialIsVisible);
+export default function useComponentVisible() {
+  const {
+    setIsComponentVisible,
+    isComponentVisible
+  } = useContext(FormContext);
   const ref = useRef(null);
 
   const handleClickOutside = (event) => {

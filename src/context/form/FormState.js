@@ -12,7 +12,7 @@ const FormState = (props) => {
   const [progress, setProgress] = useState(0);
   //animation direction
   const [direction, setDirection] = useState(0);
-
+  const [isComponentVisible, setIsComponentVisible] = useState(false);
   const navigateNext = () => {
     if (visiblePageNumber < pageLength) {
       setVisiblePageNumber(visiblePageNumber + 1);
@@ -41,7 +41,10 @@ const FormState = (props) => {
         setDirection,
         navigateNext,
         navigatePrev,
+        setProgress,
         progress,
+        isComponentVisible,
+        setIsComponentVisible,
       }}
     >
       {props.children}

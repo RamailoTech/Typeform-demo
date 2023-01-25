@@ -6,18 +6,19 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FormContext from "../context/form/FormContext";
 import { Link, useNavigate } from "react-router-dom";
 import InputRenderer from "./InputRenderer";
+import useComponentVisible from "../hooks/hook";
 
 export const Formpage = ({ question }) => {
   const {
     visiblePageNumber,
-
+    isComponentVisible,
     pageLength,
-
+    navigatePrev,
     navigateNext,
   } = useContext(FormContext);
   const inputref = useRef(null);
   const navigate = useNavigate();
-
+  console.log(isComponentVisible)
   useEffect(() => {
     if (inputref.current) {
       inputref.current.focus();
@@ -31,12 +32,18 @@ export const Formpage = ({ question }) => {
         }
         navigateNext();
       }
+      if (event.key === "ArrowDown" && !isComponentVisible) {
+        navigateNext();
+       }
+       if (event.key === "ArrowUp" && !isComponentVisible) {
+        navigatePrev();
+       }
     };
     document.addEventListener("keydown", handlelistner);
     return () => {
       document.removeEventListener("keydown", handlelistner);
     };
-  }, [navigateNext, navigate, pageLength, visiblePageNumber]);
+  }, [navigateNext,navigatePrev, navigate, pageLength, visiblePageNumber]);
 
   const RenderForm = (question) => {
     return (
