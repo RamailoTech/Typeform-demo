@@ -39,7 +39,7 @@ export const filterQuestions = (questions, formValue) => {
       return true;
     }
     return question.conditions.every((condition) => {
-      const valueOfField = formValue[condition.valueOfField];
+      const valueOfField = formValue[condition?.valueOfField];
       return handleOperation({
         valueOfField,
         operation: condition.operation,

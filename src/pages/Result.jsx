@@ -18,22 +18,26 @@ const Result = () => {
     useContext(FormContext);
   let questions = useContext(QuestionContext);
   const filteredQuestions = useFilteredQuestions();
-  console.log(filteredQuestions) 
-  const finalquestion=filteredQuestions.map((value,key)=>(value.name))
-  console.log(finalquestion)
-  let newanswer={}
-  for(let key in formValue){
-   finalquestion.filter((value)=>{
-    if(key===value){
-      newanswer[key]=formValue[key]
-    }
-   })
-  }
+  console.log(filteredQuestions);
+  const finalquestion = filteredQuestions.map((value, key) => value.name);
+  console.log(finalquestion);
+
+  useEffect(() => {
+    setFormValue((prev) => {
+      return Object.keys(prev)
+        .filter((key) => finalquestion.includes(key))
+        .reduce((obj, key) => {
+          return Object.assign(obj, {
+            [key]: prev[key],
+          });
+        }, {});
+    });
+  }, [setFormValue]);
+
   return (
     <Container sx={{ marginTop: "6rem" }}>
       {Object.entries(formValue).map(
         ([key, value]) =>
-        finalquestion.includes(key)&&
           value &&
           value.length > 0 && (
             <div key={key}>
@@ -45,12 +49,12 @@ const Result = () => {
                 >
                   <Typography>
                     {questions.map((quest, i) =>
-                      quest.name===key? quest.question : ""
+                      quest.name === key ? quest.question : ""
                     )}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>{ value && value + " "}</Typography>
+                  <Typography>{value && value + " "}</Typography>
                 </AccordionDetails>
               </Accordion>
             </div>
