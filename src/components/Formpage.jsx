@@ -11,7 +11,7 @@ import InputRenderer from "./InputRenderer";
 export const Formpage = ({ question }) => {
   const { visiblePageNumber, pageLength, setProgress, navigateNext } =
     useContext(FormContext);
-  const inputref = useRef(null);
+  // const inputref = useRef(null);
   const navigate = useNavigate();
 
   const handleChange = useCallback(() => {
@@ -20,11 +20,11 @@ export const Formpage = ({ question }) => {
     setProgress(progressbar);
   }, [navigateNext, pageLength, setProgress, visiblePageNumber]);
 
-  useEffect(() => {
-    if (inputref.current) {
-      inputref.current.focus();
-    }
-  }, [inputref, question]);
+  // useEffect(() => {
+  //   if (inputref.current) {
+  //     inputref.current.focus();
+  //   }
+  // }, [inputref, question]);
   useEffect(() => {
     const handlelistner = (event) => {
       if (event.key === "Enter") {
@@ -55,7 +55,7 @@ export const Formpage = ({ question }) => {
                   />
                   {question?.question}
                 </p>
-                <InputRenderer question={question} inputref={inputref} />
+                <InputRenderer question={question} />
                 <div>
                   {pageLength === visiblePageNumber ? (
                     <Link

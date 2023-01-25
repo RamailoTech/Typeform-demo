@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { TextInput } from "./input/textInput/inputs";
 import { RadioInput } from "./input/radioInput/RadioInput";
 import MultipleChoice from "./input/multipleChoice/MultipleChoice";
 import Autocomplete from "./input/autoComplete/autoCompleteInput";
 import { DateInput } from "./input/dateInput";
 
-const InputRenderer = ({ question, inputref }) => {
-  console.log("InputRenderer", question);
+const InputRenderer = ({ question }) => {
+  //   console.log("InputRenderer", question);
+
+  const inputRef = useCallback((node) => {
+    if (node) {
+      node.focus();
+    }
+  }, []);
+
   switch (question.answer.type) {
     case "text":
-      return <TextInput question={question} inputref={inputref} />;
+      return <TextInput question={question} inputref={inputRef} />;
     case "radio":
       return (
         <RadioInput question={question} options={question?.answer?.options} />
@@ -20,11 +27,11 @@ const InputRenderer = ({ question, inputref }) => {
         <Autocomplete
           question={question}
           options={question?.answer?.options}
-          inputref={inputref}
+          inputref={inputRef}
         />
       );
     case "dateInput":
-      return <DateInput question={question} inputref={inputref} />;
+      return <DateInput question={question} inputref={inputRef} />;
 
     case "multipleChoice":
       return (
@@ -44,25 +51,3 @@ const InputRenderer = ({ question, inputref }) => {
 };
 
 export default InputRenderer;
-
-// {question?.answer?.type === "text" ? (
-//     <TextInput question={question} inputref={inputref} />
-//   ) : question?.answer?.type === "radio" ? (
-//     <RadioInput
-//       question={question}
-//       options={question?.answer?.options}
-//     />
-//   ) : question?.answer?.type === "dropdown" ? (
-//     <Autocomplete
-//       question={question}
-//       options={question?.answer?.options}
-//       inputref={inputref}
-//     />
-//   ) : question?.answer?.type === "dateInput" ? (
-//     <DateInput question={question} inputref={inputref} />
-//   ) : (
-//     <MultipleChoice
-//       options={question?.answer?.options}
-//       question={question}
-//     />
-//   )}
