@@ -4,27 +4,42 @@ import React, { useState } from "react";
 const FormState = (props) => {
   //to show question numbers
   const [visiblePageNumber, setVisiblePageNumber] = useState(1);
-  const [globalIndex, setGlobalIndex] = useState(0);
   //conditionally rendered question changes page length
   const [pageLength, setPageLength] = useState(0);
   const [progress, setProgress] = useState(0);
   const [formValue, setFormValue] = useState({});
   const [direction, setDirection] = useState(0);
+
+  const navigateNext = () => {
+    if (visiblePageNumber < pageLength) {
+      setVisiblePageNumber(visiblePageNumber + 1);
+      setDirection(1);
+      var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
+      setProgress(progressbar);
+    }
+  };
+  const navigatePrev = () => {
+    if (visiblePageNumber > 0) {
+      setVisiblePageNumber(visiblePageNumber - 1);
+      setDirection(-1);
+    }
+  };
+
   return (
     <FormContext.Provider
       value={{
-        globalIndex,
-        setGlobalIndex,
         formValue,
         setFormValue,
         pageLength,
         setPageLength,
         visiblePageNumber,
         setVisiblePageNumber,
-        progress,
-        setProgress,
         direction,
-         setDirection
+        setDirection,
+        navigateNext,
+        navigatePrev,
+        setProgress,
+        progress
       }}
     >
       {props.children}
