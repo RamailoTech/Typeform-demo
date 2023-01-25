@@ -145,7 +145,7 @@ const QuestionState = (props) => {
       question: "Which is the best way to eat healthier",
 
       answer: {
-        type: "multiple_choice",
+        type: "multipleChoice",
         options: [
           "Vegan diet",
 
