@@ -24,13 +24,12 @@ export const Formpage = ({ question }) => {
   //     inputref.current.focus();
   //   }
   // }, [inputref, question]);
-  useEffect(() => {
-    const handlelistner = (event) => {
-      if (event.key === "Enter") {
-        if (pageLength === visiblePageNumber) {
-          return navigate("/typeform/result");
-        }
-        handleChange();
+
+
+  const handlelistner = (event) => {
+    if (event.key === "Enter") {
+      if (pageLength === visiblePageNumber) {
+        return navigate("/typeform/result");
       }
       handleChange();
     }
