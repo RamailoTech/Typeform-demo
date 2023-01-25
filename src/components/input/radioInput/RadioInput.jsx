@@ -20,6 +20,11 @@ export const RadioInput = ({ options, question }) => {
     } else {
       setActive(null);
     }
+  
+  }, []);
+
+  useEffect(() => {
+    
     const handlelistner = (event) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
       if (clickedIndex < options.length) {
@@ -36,7 +41,7 @@ export const RadioInput = ({ options, question }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [options, active]);
+  }, [active]);
 
   return (
     <>

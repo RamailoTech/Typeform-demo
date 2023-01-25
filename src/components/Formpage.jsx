@@ -18,6 +18,7 @@ export const Formpage = ({ question, navigateNext }) => {
     pageLength,
     setProgress,
     setDirection,
+    formValue
   } = useContext(FormContext);
   const inputref = useRef(null);
   const navigate = useNavigate();
@@ -38,15 +39,18 @@ export const Formpage = ({ question, navigateNext }) => {
       inputref.current.focus();
     }
   }, [inputref, question]);
-  useEffect(() => {
-    const handlelistner = (event) => {
-      if (event.key === "Enter") {
-        if (pageLength === visiblePageNumber) {
-          return navigate("/typeform/result");
-        }
-        handleChange();
+
+
+  const handlelistner = (event) => {
+    if (event.key === "Enter") {
+      if (pageLength === visiblePageNumber) {
+        return navigate("/typeform/result");
       }
-    };
+      handleChange();
+    }
+  };
+  console.log(formValue);
+  useEffect(() => {
     document.addEventListener("keydown", handlelistner);
     return () => {
       document.removeEventListener("keydown", handlelistner);

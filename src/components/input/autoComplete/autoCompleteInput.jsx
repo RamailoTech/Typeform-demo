@@ -9,7 +9,7 @@ const AutoCompleteInput = ({ options, question, inputref }) => {
 
   const [value, setValue] = useState("");
   const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(true);
+    useComponentVisible(false);
 
   const handleChange = () => {
     setIsComponentVisible(true);
