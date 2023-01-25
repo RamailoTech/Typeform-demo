@@ -3,13 +3,9 @@ import { Grid, Box, Button } from "@mui/material";
 import flower from "../assets/images/flower.jpg";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { TextInput } from "../components/input/textInput/inputs";
-import { RadioInput } from "../components/input/radioInput/RadioInput";
-import MultipleChoice from "../components/input/multipleChoice/MultipleChoice";
-import Autocomplete from "../components/input/autoComplete/autoCompleteInput";
-import { DateInput } from "../components/input/dateInput";
 import FormContext from "../context/form/FormContext";
 import { Link, useNavigate } from "react-router-dom";
+import InputRenderer from "./InputRenderer";
 
 export const Formpage = ({ question }) => {
   const {
@@ -64,27 +60,7 @@ export const Formpage = ({ question }) => {
                   />
                   {question?.question}
                 </p>
-                {question?.answer?.type === "text" ? (
-                  <TextInput question={question} inputref={inputref} />
-                ) : question?.answer?.type === "radio" ? (
-                  <RadioInput
-                    question={question}
-                    options={question?.answer?.options}
-                  />
-                ) : question?.answer?.type === "dropdown" ? (
-                  <Autocomplete
-                    question={question}
-                    options={question?.answer?.options}
-                    inputref={inputref}
-                  />
-                ) : question?.answer?.type === "dateInput" ? (
-                  <DateInput question={question} inputref={inputref} />
-                ) : (
-                  <MultipleChoice
-                    options={question?.answer?.options}
-                    question={question}
-                  />
-                )}
+                <InputRenderer question={question} />
 
                 <div>
                   {pageLength === visiblePageNumber ? (
