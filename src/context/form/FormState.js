@@ -14,6 +14,8 @@ const FormState = (props) => {
     if (visiblePageNumber < pageLength) {
       setVisiblePageNumber(visiblePageNumber + 1);
       setDirection(1);
+      var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
+      setProgress(progressbar);
     }
   };
   const navigatePrev = () => {
@@ -32,12 +34,12 @@ const FormState = (props) => {
         setPageLength,
         visiblePageNumber,
         setVisiblePageNumber,
-        progress,
-        setProgress,
         direction,
         setDirection,
         navigateNext,
         navigatePrev,
+        setProgress,
+        progress
       }}
     >
       {props.children}

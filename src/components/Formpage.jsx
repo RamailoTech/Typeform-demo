@@ -12,18 +12,11 @@ export const Formpage = ({ question }) => {
     visiblePageNumber,
 
     pageLength,
-    setProgress,
 
     navigateNext,
   } = useContext(FormContext);
   const inputref = useRef(null);
   const navigate = useNavigate();
-
-  const handleChange = useCallback(() => {
-    navigateNext();
-    var progressbar = Math.floor((visiblePageNumber / pageLength) * 100);
-    setProgress(progressbar);
-  }, [navigateNext, pageLength, setProgress, visiblePageNumber]);
 
   useEffect(() => {
     if (inputref.current) {
@@ -36,14 +29,14 @@ export const Formpage = ({ question }) => {
         if (pageLength === visiblePageNumber) {
           return navigate("/typeform/result");
         }
-        handleChange();
+        navigateNext();
       }
     };
     document.addEventListener("keydown", handlelistner);
     return () => {
       document.removeEventListener("keydown", handlelistner);
     };
-  }, [handleChange, navigate, pageLength, visiblePageNumber]);
+  }, [navigateNext, navigate, pageLength, visiblePageNumber]);
 
   const RenderForm = (question) => {
     return (
@@ -84,7 +77,7 @@ export const Formpage = ({ question }) => {
                           }}
                         />
                       }
-                      onClick={handleChange}
+                      onClick={() => navigateNext()}
                     >
                       OK
                     </Button>
