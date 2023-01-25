@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import InputRenderer from "./InputRenderer";
 
 export const Formpage = ({ question }) => {
-  const { visiblePageNumber, pageLength, setProgress, navigateNext } =
+  const { visiblePageNumber, pageLength, navigatePrev, navigateNext } =
     useContext(FormContext);
   // const inputref = useRef(null);
   const navigate = useNavigate();
@@ -33,6 +33,12 @@ export const Formpage = ({ question }) => {
       }
       handleChange();
     }
+    if (event.key === "ArrowDown") {
+      navigateNext();
+     }
+     if (event.key === "ArrowUp") {
+      navigatePrev();
+     }
   };
 
   useEffect(() => {
