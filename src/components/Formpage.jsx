@@ -42,7 +42,14 @@ export const Formpage = ({ question }) => {
     return () => {
       document.removeEventListener("keydown", handlelistner);
     };
-  }, [navigateNext, navigatePrev, navigate, pageLength, visiblePageNumber]);
+  }, [
+    navigateNext,
+    navigatePrev,
+    navigate,
+    pageLength,
+    visiblePageNumber,
+    isComponentVisible,
+  ]);
 
   const RenderForm = (question) => {
     return (
