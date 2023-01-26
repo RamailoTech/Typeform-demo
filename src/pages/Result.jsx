@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -20,13 +20,23 @@ const Result = () => {
   const filteredQuestions = useFilteredQuestions();
   console.log(filteredQuestions);
   const finalquestion = filteredQuestions.map((value, key) => value.name);
-  console.log(finalquestion);
+
+  useEffect(() => {
+    setFormValue((prev) => {
+      return Object.keys(prev)
+        .filter((key) => finalquestion.includes(key))
+        .reduce((obj, key) => {
+          return Object.assign(obj, {
+            [key]: prev[key],
+          });
+        }, {});
+    });
+  }, [setFormValue]);
 
   return (
     <Container sx={{ marginTop: "6rem" }}>
       {Object.entries(formValue).map(
         ([key, value]) =>
-          finalquestion.includes(key) &&
           value &&
           value.length > 0 && (
             <div key={key}>

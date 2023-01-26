@@ -46,7 +46,6 @@ const AutoCompleteInput = ({ options, question }) => {
         >
           <input
             onChange={handleChange}
-            
             value={value || ""}
             type="text"
             className="autocomplete_text_answer_input"

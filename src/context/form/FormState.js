@@ -4,12 +4,15 @@ import React, { useState } from "react";
 const FormState = (props) => {
   //to show question numbers
   const [visiblePageNumber, setVisiblePageNumber] = useState(1);
+  //formValue is the answer state
+  const [formValue, setFormValue] = useState({});
   //conditionally rendered question changes page length
   const [pageLength, setPageLength] = useState(0);
+  //progess indicator
   const [progress, setProgress] = useState(0);
-  const [formValue, setFormValue] = useState({});
+  //animation direction
   const [direction, setDirection] = useState(0);
-  const [isComponentVisible, setIsComponentVisible] =useState(false);
+  const [isComponentVisible, setIsComponentVisible] = useState(false);
   const navigateNext = () => {
     if (visiblePageNumber < pageLength) {
       setVisiblePageNumber(visiblePageNumber + 1);
@@ -41,7 +44,7 @@ const FormState = (props) => {
         setProgress,
         progress,
         isComponentVisible,
-        setIsComponentVisible
+        setIsComponentVisible,
       }}
     >
       {props.children}

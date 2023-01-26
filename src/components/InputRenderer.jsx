@@ -22,11 +22,7 @@ const InputRenderer = ({ question }) => {
 
     case "dropdown":
       return (
-        <Autocomplete
-          question={question}
-          options={question?.answer?.options}
-          inputref={inputRef}
-        />
+        <Autocomplete question={question} options={question?.answer?.options} />
       );
     case "dateInput":
       return <DateInput question={question} inputref={inputRef} />;
