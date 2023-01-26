@@ -20,7 +20,6 @@ const Result = () => {
   const filteredQuestions = useFilteredQuestions();
   console.log(filteredQuestions);
   const finalquestion = filteredQuestions.map((value, key) => value.name);
-  console.log(finalquestion);
 
   useEffect(() => {
     setFormValue((prev) => {
