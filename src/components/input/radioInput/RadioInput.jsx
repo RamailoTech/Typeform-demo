@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import "../input.css";
 import CheckIcon from "@mui/icons-material/Check";
 import FormContext from "../../../context/form/FormContext";
@@ -8,11 +8,16 @@ export const RadioInput = ({ options, question }) => {
   const [active, setActive] = useState(null);
   const { setFormValue, formValue } = useContext(FormContext);
 
-  const handleClick = (e, i) => {
-    setActive(i);
+  const handleClick = useCallback(
+    (e, i) => {
+      setActive(i);
 
-    setFormValue({ ...formValue, [question.name]: options[i] });
-  };
+      setFormValue((prev) => {
+        return { ...prev, [question.name]: options[i] };
+      });
+    },
+    [options, question.name, setFormValue]
+  );
 
   useEffect(() => {
     if (formValue[question.name] !== undefined) {
@@ -20,11 +25,9 @@ export const RadioInput = ({ options, question }) => {
     } else {
       setActive(null);
     }
-  
-  }, []);
+  }, [formValue, options, question.name]);
 
   useEffect(() => {
-    
     const handlelistner = (event) => {
       var clickedIndex = AlphabetArray.indexOf(event.key);
       if (clickedIndex < options.length) {
@@ -41,7 +44,7 @@ export const RadioInput = ({ options, question }) => {
     return () => {
       window.removeEventListener("keydown", handlelistner);
     };
-  }, [active]);
+  }, [active, formValue, handleClick, options, question.name, setFormValue]);
 
   return (
     <>

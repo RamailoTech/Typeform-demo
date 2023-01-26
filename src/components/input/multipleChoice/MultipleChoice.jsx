@@ -54,8 +54,6 @@ const MultipleChoice = ({ options, question }) => {
         if (active.includes(clickedIndex)) {
           setActive(active.filter((curr) => curr !== clickedIndex));
 
-          //prev
-
           setFormValue((prev) => {
             return {
               ...prev,
