@@ -18,7 +18,6 @@ const Result = () => {
     useContext(FormContext);
   let questions = useContext(QuestionContext);
   const filteredQuestions = useFilteredQuestions();
-  console.log(filteredQuestions);
   const finalquestion = filteredQuestions.map((value, key) => value.name);
 
   useEffect(() => {
